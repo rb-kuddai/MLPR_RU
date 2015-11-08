@@ -8,6 +8,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{titling}
 \usepackage{graphicx} %package to manage images
+\usepackage{caption} % subfigure package
+\usepackage{subcaption} % subfigure package
 
 \graphicspath{ {/images} } %path to images folder
 
@@ -30,7 +32,7 @@
 			 	\item
 				 	\begin{figure}[htp]
 				 		\centering
-				 		\includegraphics[width=12cm]{images/p1-1-a_std_hist.png}
+				 		\includegraphics[width=12cm]{images/p1-1-a_std_hist}
 				 		\caption{histogram of standard deviations in the xtr dataset after normalisation}
 				 		\label{fig:p1-1-a_std_hist}
 				 	\end{figure}
@@ -54,7 +56,28 @@
 						m = \frac{1032}{2}(1 - \sqrt{1 - 4 * 0.0635^2}) \approx 4.178
 					\end{gather*}
 					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original 63 pixel intensity) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. $round(0.0038/0.0156)=round(0.244)=0$ so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
-
+				\item
+				 	\begin{figure}[t]
+				 		\caption{patch images}
+						\begin{subfigure}{0.5\textwidth}
+											      	\includegraphics[width=\linewidth]{images/p1-1-c_flat}
+											      	\caption{flat image, id 10974}
+											      	\label{fig:flat_patch_image}
+						\end{subfigure}%
+						\begin{subfigure}{0.5\textwidth}
+											      	\includegraphics[width=\linewidth]{images/p1-1-c_non_flat}
+											      	\caption{non-flat image, id 805}
+											      	\label{fig:non-flat_patch_image}
+						\end{subfigure}%
+				 	\end{figure}
+				 	See figure 2
+				 	%The code responsible for generation of patch images on figure 2:
+				 	%\lstinputlisting{code/tsk1.m} 
 			\end{enumerate}		
+		\subsection{Linear regression with adjacent pixels}
+			\begin{enumerate}[label=(\alph*)]
+				\item
+					sdfasd
+			\end{enumerate}
 
 \end{document}

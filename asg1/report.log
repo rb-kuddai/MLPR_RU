@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  8 NOV 2015 12:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  8 NOV 2015 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -565,43 +565,65 @@ Package graphics Info: Driver file: pdftex.def on input line 94.
 \Gin@req@height=\dimen117
 \Gin@req@width=\dimen118
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen119
+\captionmargin@=\dimen120
+\captionwidth=\dimen121
+\caption@tempdima=\dimen122
+\caption@indent=\dimen123
+\caption@parindent=\dimen124
+\caption@hangindent=\dimen125
+)
+\c@ContinuedFloat=\count109
+Package caption Info: listings package is loaded.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count110
+\c@subtable=\count111
+)
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 26.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    ... okay on input line 26.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen119
+\scratchcounter=\count112
+\scratchdimen=\dimen126
 \scratchbox=\box31
-\nofMPsegments=\count110
-\nofMParguments=\count111
+\nofMPsegments=\count113
+\nofMParguments=\count114
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen120
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen127
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
 \everyMPtoPDFconversion=\toks26
 )
-\c@lstlisting=\count115
+\c@lstlisting=\count118
  (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -650,42 +672,60 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<images/p1-1-a_std_hist.png, id=1, 689.57625pt x 499.8675pt>
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
+<images/p1-1-a_std_hist.png, id=1, 562.1pt x 421.575pt>
 File: images/p1-1-a_std_hist.png Graphic file (type png)
 
 <use images/p1-1-a_std_hist.png>
-Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 33.
-(pdftex.def)             Requested size: 341.43306pt x 247.5pt.
+Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 35.
+(pdftex.def)             Requested size: 341.43306pt x 256.07324pt.
  [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
 s/p1-1-a_std_hist.png (PNG copy)>] [2]
-[3] (./report.aux) ) 
+<images/p1-1-c_flat.png, id=22, 562.1pt x 421.575pt>
+File: images/p1-1-c_flat.png Graphic file (type png)
+
+<use images/p1-1-c_flat.png>
+Package pdftex.def Info: images/p1-1-c_flat.png used on input line 63.
+(pdftex.def)             Requested size: 172.5pt x 129.37462pt.
+
+<images/p1-1-c_non_flat.png, id=23, 562.1pt x 421.575pt>
+File: images/p1-1-c_non_flat.png Graphic file (type png)
+
+<use images/p1-1-c_non_flat.png>
+Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 68.
+(pdftex.def)             Requested size: 172.5pt x 129.37462pt.
+ [3 <./images/p1-1-c_flat.png (PNG copy)> <./images/p1-1-c_non_flat.png (PNG co
+py)>] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 5352 strings out of 493089
- 71441 string characters out of 6134841
- 142958 words of memory out of 5000000
- 8757 multiletter control sequences out of 15000+600000
- 13652 words of font info for 36 fonts, out of 8000000 for 9000
+ 6456 strings out of 493089
+ 91545 string characters out of 6134841
+ 163479 words of memory out of 5000000
+ 9850 multiletter control sequences out of 15000+600000
+ 14417 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,13n,43p,969b,364s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-supe
-r/cm-super-t1.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1200.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pf
+ 38i,13n,43p,969b,572s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-su
+per/cm-super-t1.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx120
+0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pf
 b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></
 usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on report.pdf (3 pages, 145146 bytes).
+Output written on report.pdf (3 pages, 185990 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 70 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
