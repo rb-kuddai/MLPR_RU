@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage[]{mcode}
+\usepackage{amsmath}
+\usepackage{graphicx} %package to manage images
+\graphicspath{ {images/} }
+
+\def\subject{MACHINE LEARNING AND PATTERN RECOGNITION}
+\def\matricno{s1569105}
+\def\exmno{B076165}
+
+\title{\subject\\Assignment 1}
+\date{November 2015}
+\author{Matriculation number - \matricno\\Examination number - \exmno}
+
+\begin{document}
+
+\maketitle
+	\section{The Next Pixel Prediction Task}
+		\subsection{Data preprocessing and visualization}
+			 \begin{enumerate}[label=(\alph*)]
+				\item
+					Let $N-m$ be number of minimum values and let $m$ be number of maximum values. In our case min. and max. possible values are 0 and 1 respectively.
+					\begin{gather*}
+						N-m\\
+						m\\
+						\sigma = \sqrt{5}
+					\end{gather*}
+				\item 
+					Classifiers performance:
+					\begin{center}
+						\begin{tabular}{| l | r |}
+							\hline
+							Classifier & Percent correct \\ \hline
+							Naive Bayes (NaiveBayes) & 20.1595 \% \\ 
+							Decision tree (J48) & 77.9353 \% \\
+							\hline
+						\end{tabular}
+					\end{center}
+
+			\end{enumerate}		
+
+\end{document}
