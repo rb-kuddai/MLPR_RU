@@ -5,8 +5,13 @@
 \usepackage{titling}
 \usepackage[]{mcode}
 \usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{titling}
 \usepackage{graphicx} %package to manage images
-\graphicspath{ {images/} }
+
+\graphicspath{ {/images} } %path to images folder
+
+\setlength{\droptitle}{-10em}   % This is your set screw
 
 \def\subject{MACHINE LEARNING AND PATTERN RECOGNITION}
 \def\matricno{s1569105}
@@ -22,24 +27,30 @@
 	\section{The Next Pixel Prediction Task}
 		\subsection{Data preprocessing and visualization}
 			 \begin{enumerate}[label=(\alph*)]
+			 	\item
+				 	\begin{figure}[htp]
+				 		\centering
+				 		\includegraphics[width=12cm]{images/p1-1-a_std_hist.png}
+				 		\caption{histogram of standard deviations in the xtr dataset after normalisation}
+				 	\end{figure}
 				\item
-					Let $N-m$ be number of minimum values and let $m$ be number of maximum values. In our case min. and max. possible values are 0 and 1 respectively.
+					I would choose mean of the all the pixels (1032) above and to the left of the target pixel as a simplest predictor of the target pixel value for flat patches. In general, I would prefer median because it is more robust to outliers if our dataset is noisy but in our case pixels can take only discrete values and I will show that mean suits us.\\
+					Consider extreme case where in our flat patch after normalisation (all pixel values between 0 and 1) where most pixels are zeroes and small portion of pixels are ones (correspond to 63 intensity of original pixel). It is a flat patch so its standard deviation should follow this inequality $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
-						N-m\\
-						m\\
-						\sigma = \sqrt{5}
+						m < N - m\\
+						\mu = \frac{(N - m) 0 + m  1}{N} = \frac{m}{N}\\
+						\sigma^2 = (N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2 \\
+						= \frac{(N - m)m^2}{N^3} + \frac{m(N - m)^2}{N ^ 3}\\
+						N^3\sigma^2 = Nm^2 - m^3 + mN^2 - 2m^2N + m^3 \\
+						= mN^2-m^2N\\
+						m^2 - mN + N^2\sigma^2 = 0\\
+						m = \frac{N}{2}(1 - \sqrt{1 - 4 \sigma ^ 2})\quad\text{(minus because our case is $m < N - m$ )}\\
 					\end{gather*}
-				\item 
-					Classifiers performance:
-					\begin{center}
-						\begin{tabular}{| l | r |}
-							\hline
-							Classifier & Percent correct \\ \hline
-							Naive Bayes (NaiveBayes) & 20.1595 \% \\ 
-							Decision tree (J48) & 77.9353 \% \\
-							\hline
-						\end{tabular}
-					\end{center}
+					putting $\sigma_{flat \, pach \, max} = \frac{4}{63} \approx 0.0635$ instead of $\sigma$ and using $N = 1032$ we get
+					\begin{gather*}
+						m = \frac{1032}{2}(1 - \sqrt{1 - 4 * 0.0635^2}) \approx 4.178
+					\end{gather*}
+					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original 63 pixel intensity) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. $0.0038 < 0.0156$ so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
 
 			\end{enumerate}		
 
