@@ -39,11 +39,11 @@
 				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate (after rounding using threshold) standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
 				 	From the \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. 
 				\item
-					I would choose mean of the all the pixels (1032) above and to the left of target pixel as a simplest predictor of the target pixel value for flat patches. In general, I would prefer median because it is more robust to outliers if our dataset is noisy but in our case pixels can take only discrete values and I will show that mean suits us.\\
-					Consider extreme case where after normalisation (all pixel values between 0 and 1) in our flat patch  most pixels are zeroes and small portion of pixels are ones (correspond to 63 intensity of original pixel). It is a flat patch so its standard deviation should follow this inequality $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
+					I would choose mean of the all the pixels (1032) above and to the left of target pixel as a simplest predictor of the target pixel value for flat patches. Given definition of flat patches the value of the pixel in the flat patch will be something like this $f(x) = const_{flat\ patch} + o(0, \sigma_{flat\ patch})$ where o is random and small in comparison to $const_{flat\ patch}$, and it has 0 mean and as $\sigma_{flat\ patch}$ its standard deviation which follows $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. In general, I would prefer median because it is more robust to outliers if our dataset is noisy but in our case pixels can take only discrete values and I will show that mean suits us.\\
+					Consider extreme case where after normalisation (all pixel values between 0 and 1) in our flat patch  most pixels are zeroes and small portion of pixels are ones (correspond to 63 intensity of original pixel). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
 						m < N - m\\
-						\mu = \frac{(N - m) 0 + m  1}{N} = \frac{m}{N}\\
+						\mu = \frac{(N - m) * 0 + m * 1}{N} = \frac{m}{N}\\
 						\sigma^2 = (N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2 \\
 						= \frac{(N - m)m^2}{N^3} + \frac{m(N - m)^2}{N ^ 3}\\
 						N^3\sigma^2 = Nm^2 - m^3 + mN^2 - 2m^2N + m^3 \\
@@ -70,14 +70,21 @@
 											      	\label{fig:non-flat_patch_image}
 						\end{subfigure}%
 				 	\end{figure}
-				 	See figure 2
-				 	%The code responsible for generation of patch images on figure 2:
-				 	%\lstinputlisting{code/tsk1.m} 
+					 The code which is responsible for showing patch images on figure 2:
+				 	\lstinputlisting{code/tsk1.m} 
 			\end{enumerate}		
 		\subsection{Linear regression with adjacent pixels}
 			\begin{enumerate}[label=(\alph*)]
 				\item
-					sdfasd
+				 	\begin{figure}[htp]
+				 		\centering
+				 		\includegraphics[width=12cm]{images/p1-2-a_closest_pixels}
+				 		\caption{scatter plot of neighbour's pixels: x(j, end), x(j, end - 34), y(j)}
+				 		\label{fig:p1-2-a_closest_pixels}
+				 	\end{figure}
+					I used 5000 training points from xtr\_nf and ytr\_nf to plot figure \ref{fig:p1-2-a_closest_pixels}. From it we can see that x(j, end), x(j, end - 34), y(j) are strongly positively correlated. However, there is some relatively small number of deviations from this trend. It seems that these deviations are normally distributed so linear regression should be reasonable model to describe this data.
+				\item
+					dsf					
 			\end{enumerate}
 
 \end{document}
