@@ -5,6 +5,7 @@
 \usepackage{titling}
 \usepackage[]{mcode}
 \usepackage{amsmath}
+\usepackage{hyperref} %for hyper links
 \usepackage[T1]{fontenc}
 \usepackage{titling}
 \usepackage{graphicx} %package to manage images
@@ -14,6 +15,8 @@
 \graphicspath{ {/images} } %path to images folder
 
 \setlength{\droptitle}{-10em}   % This is your set screw
+
+\newcommand{\vect}[1]{\boldsymbol{#1}} % to make vectors
 
 \def\subject{MACHINE LEARNING AND PATTERN RECOGNITION}
 \def\matricno{s1569105}
@@ -84,7 +87,22 @@
 				 	\end{figure}
 					I used 5000 training points from xtr\_nf and ytr\_nf to plot figure \ref{fig:p1-2-a_closest_pixels}. From it we can see that x(j, end), x(j, end - 34), y(j) are strongly positively correlated. However, there is some relatively small number of deviations from this trend. It seems that these deviations are normally distributed so linear regression should be reasonable model to describe this data.
 				\item
-					dsf					
+					Derivation of this solution can be taken from MLPR lecture 7 slides 8-11 \href{http://www.inf.ed.ac.uk/teaching/courses/mlpr/2015/slides/07_regression.pdf}{here}. The solution for weights from there is:
+					\begin{gather*}
+					\hat{\vect{w}} = (\Phi^T \Phi)^{-1} \Phi^T \vect{y}
+					\end{gather*}
+					In our notation matrix $\Phi$ will become:
+					\begin{gather*}
+						\Phi = X = 
+						\begin{pmatrix}
+						1, x(1, end), x(1, end - 34)\\
+						1, x(2, end), x(2, end - 34)\\
+						\ldots \\
+						1, x(N, end), x(N, end -34)
+						\end{pmatrix} \\
+						\hat{\vect{w}} = (X^T X)^{-1} X^T \vect{y}
+					\end{gather*}
+					where N is a number of training data points and x is our dataset (it will be xtr\_nf in the next task)
 			\end{enumerate}
 
 \end{document}
