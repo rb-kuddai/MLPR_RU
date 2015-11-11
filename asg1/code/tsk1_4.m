@@ -7,11 +7,9 @@ function [] = tsk1_4(x_train, t_train, x_test, t_test)
     %train (it will add bias term automatically)
     [w, predictor] = cs_linear_regression(x_train, t_train);
 
-    compute_error = @(t, x) cs_rmse(t, predictor(x));
+    error_train = cs_rmse(t_train, predictor(x_train));
+    error_test  = cs_rmse(t_test,  predictor(x_test));
     
-    error_train = compute_error(t_train, x_train);
     display(error_train, 'rmse on the training set');
-
-    error_test = compute_error(t_test, x_test);
     display(error_test,  'rmse on the test set');
 end

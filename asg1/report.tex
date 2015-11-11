@@ -209,6 +209,27 @@
 					\hline
 				\end{tabular}
 			\end{center}
-			There is an improvement in comparison to both previous methods but on the test set it is quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of the target pixel better, indeed, the most significant features are the pixels adjacent to the target one.
-			
+			There is an improvement comparing with both previous methods but on the test set it is only quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of target pixel better, indeed, the most significant features are pixels adjacent to the target one.
+			Code snippet for this task:
+			\lstinputlisting{code/tsk1_4.m}
+		\subsection{Neural Network with all pixels}
+			\begin{enumerate}[label=(\alph*)]
+				\item
+					the RMSE for test and training sets:
+					\begin{center}
+						\begin{tabular}{| c | c | c |}
+							\hline
+							\, & Training set & Test set \\ \hline
+							RMSE  &  0.0333 & 0.0473 \\ 
+							\hline
+						\end{tabular}
+					\end{center}
+					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger.
+					Code snippet for this task:
+					\newpage
+					\lstinputlisting{code/tsk1_5_a.m}
+					
+				\item
+					
+			\end{enumerate}
 \end{document}

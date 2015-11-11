@@ -33,9 +33,9 @@ function [] = tsk1_1_c(xtr)
         colormap gray;
     end
 
-    [flat_image, rnd_flat_id] = get_rnd_image(flat_patches);
-    [non_flat_image, rnd_non_flat_id] = get_rnd_image(non_flat_patches);
+    [flat_image, flat_id] = get_rnd_image(flat_patches);
+    [non_flat_image, non_flat_id] = get_rnd_image(non_flat_patches);
 
-    show_image(flat_image, 'flat image, id ', rnd_flat_id);
-    show_image(non_flat_image, 'non-flat image, id ', rnd_non_flat_id);
+    show_image(flat_image, 'flat image, id ', flat_id);
+    show_image(non_flat_image, 'non-flat image, id ', non_flat_id);
 end

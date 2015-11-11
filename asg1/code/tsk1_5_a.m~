@@ -1,0 +1,17 @@
+%load imgregdata.mat     % I do it via terminal
+%load welltrainedMLP.mat % I do it via terminal
+
+%launched via
+%tsk1_3_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
+function [] = tsk1_5_a(net, x_train, t_train, x_all_test, t_test)
+    %t - means target values
+
+    y_train = rbffwd(net, x_train);
+    y_test  = rbffwd(net, x_test);
+
+    rmse_train = cs_rmse(t_train, y_train);
+    rmse_test  = cs_rmse(t_test,  y_test);
+
+    display(rmse_train, 'rmse on the training set');
+    display(rmse_test,  'rmse on the test set');
+end

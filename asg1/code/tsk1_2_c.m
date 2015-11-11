@@ -12,13 +12,11 @@ function [] = tsk1_2_c(x_all_train, t_train, x_all_test, t_test)
     %train (it will add bias term automatically)
     [w, predictor] = cs_linear_regression(x_train, t_train);
     display(w, 'weights for neighbours pixels features');
-
-    compute_error = @(t, x) cs_rmse(t, predictor(x));
     
-    error_train = compute_error(t_train, x_train);
+    error_train = cs_rmse(t_train, predictor(x_train));
+    error_test  = cs_rmse(t_test,  predictor(x_test));
+    
     display(error_train, 'rmse on the training set');
-
-    error_test = compute_error(t_test, x_test);
     display(error_test,  'rmse on the test set');
 
     %show surface
