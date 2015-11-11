@@ -1,49 +1,41 @@
 %load imgregdata.mat % I do it via terminal
-xx = xtr ./ 63;
-xx_std = std(xx,0,2);
 
-%get indixes for flat and non-flat patches respectively
-%the threshold 4/63 is taken from the task 
-xx_f_ids  = bsxfun(@le, xx_std, ones(size(xx_std)) .* 4/63);
-xx_nf_ids = bsxfun(@gt, xx_std, ones(size(xx_std)) .* 4/63);
+%launch via tsk1_1_c(xtr)
+function [] = tsk1_1_c(xtr)
+    %normalising
+    patches = xtr ./ 63;
+    patches_std = std(patches,0,2);
 
-%slicing
-xx_f  = xx(xx_f_ids, :);
-xx_nf = xx(xx_nf_ids,:); 
+    %the threshold 4/63 is taken from the task 
+    split_threshold = ones(size(patches_std)) .* 4/63;
+    flat_patches_ids     = bsxfun(@le, patches_std, split_threshold);
+    non_flat_patches_ids = bsxfun(@gt, patches_std, split_threshold);
 
-%pick one random example of flat patch and non-flat patch
-get_rnd_row = @(X) randi(size(X, 1), 1); 
+    %split on flat and non-flat patches
+    flat_patches     = patches(flat_patches_ids, :);
+    non_flat_patches = patches(non_flat_patches_ids,:); 
 
-%flat
-rnd_flat_id = get_rnd_row(xx_f);
-display(rnd_flat_id, 'random index of flat patch');
-flat_patch = xx_f(rnd_flat_id, :);
+    function [rnd_image, rnd_image_id] = get_rnd_image(patches)
+        rnd_image_id = randi(size(patches, 1), 1);
+        patch = patches(rnd_image_id, :);
+        %expanding patch to the full size
+        patch(1050) = 0;
+        %reshaping to image
+        rnd_image = reshape(patch, [35, 30]);
+        %transposing them to ensure right position on the plot
+        rnd_image = rnd_image';
+    end
 
-%non-flat
-rnd_non_flat_id = get_rnd_row(xx_nf);
-display(rnd_non_flat_id, 'random index of non-flat patch');
-non_flat_patch = xx_nf(rnd_non_flat_id, :);
+    function [] = show_image(image, title_str, image_id)
+        figure;
+        imagesc(image, [0, 1]);
+        title(strcat(title_str, num2str(image_id)));
+        colormap gray;
+    end
 
-%expanding patches to the full size
-flat_patch(1050) = 0;
-non_flat_patch(1050) = 0;
+    [flat_image, rnd_flat_id] = get_rnd_image(flat_patches);
+    [non_flat_image, rnd_non_flat_id] = get_rnd_image(non_flat_patches);
 
-%creating images
-flat_image = reshape(flat_patch, [35, 30]);
-non_flat_image = reshape(non_flat_patch, [35, 30]);
-
-%show images
-%inverting them to ensure right position 
-%last index of the patch vector patch_vector(1050) == patch_image(30, 35)
-
-%flat
-figure;
-imagesc(flat_image', [0, 1]);
-title(strcat('flat image, id ', num2str(rnd_flat_id)));
-colormap gray;
-
-%non-flat
-figure;
-imagesc(non_flat_image', [0, 1]);
-title(strcat('non-flat image, id ', num2str(rnd_non_flat_id)));
-colormap gray;
+    show_image(flat_image, 'flat image, id ', rnd_flat_id);
+    show_image(non_flat_image, 'non-flat image, id ', rnd_non_flat_id);
+end
