@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  9 NOV 2015 09:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  11 NOV 2015 15:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -705,58 +705,77 @@ Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count120
 \c@subtable=\count121
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+\Gm@cnth=\count122
+\Gm@cntv=\count123
+\c@Gm@tempcnt=\count124
+\Gm@bindingoffset=\dimen130
+\Gm@wd@mp=\dimen131
+\Gm@odd@mp=\dimen132
+\Gm@even@mp=\dimen133
+\Gm@layoutwidth=\dimen134
+\Gm@layoutheight=\dimen135
+\Gm@layouthoffset=\dimen136
+\Gm@layoutvoffset=\dimen137
+\Gm@dimlist=\toks25
+)
+
+Package geometry Warning: Over-specification in `h'-direction.
+    `width' (483.69684pt) is ignored.
+
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 42.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
-\scratchdimen=\dimen130
+\scratchcounter=\count125
+\scratchdimen=\dimen138
 \scratchbox=\box31
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count125
-\MPscratchDim=\dimen131
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks26
+\nofMPsegments=\count126
+\nofMParguments=\count127
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count128
+\MPscratchDim=\dimen139
+\MPnumerator=\count129
+\makeMPintoPDFobject=\count130
+\everyMPtoPDFconversion=\toks27
 )
-\c@lstlisting=\count128
+\c@lstlisting=\count131
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring OFF on input line 29.
+Package hyperref Info: Link coloring OFF on input line 42.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count129
+\c@section@level=\count132
 )
-LaTeX Info: Redefining \ref on input line 29.
-LaTeX Info: Redefining \pageref on input line 29.
-LaTeX Info: Redefining \nameref on input line 29.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
 
 (./report.out) (./report.out)
 \@outlinefile=\write3
@@ -781,86 +800,140 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-<images/p1-1-a_std_hist.png, id=16, 562.1pt x 421.575pt>
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(71.13188pt, 731.23582pt, 42.67914pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=731.23582pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+<images/p1-1-a_std_hist.png, id=20, 562.1pt x 421.575pt>
 File: images/p1-1-a_std_hist.png Graphic file (type png)
 
 <use images/p1-1-a_std_hist.png>
-Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 38.
+Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 51.
 (pdftex.def)             Requested size: 341.43306pt x 256.07324pt.
- [1
-
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/p1-1-a_std_hist.png (PNG copy)>] [2]
-<images/p1-1-c_flat.png, id=42, 562.1pt x 421.575pt>
-File: images/p1-1-c_flat.png Graphic file (type png)
-
-<use images/p1-1-c_flat.png>
-Package pdftex.def Info: images/p1-1-c_flat.png used on input line 66.
-(pdftex.def)             Requested size: 172.5pt x 129.37462pt.
-
-<images/p1-1-c_non_flat.png, id=43, 562.1pt x 421.575pt>
-File: images/p1-1-c_non_flat.png Graphic file (type png)
-
-<use images/p1-1-c_non_flat.png>
-Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 71.
-(pdftex.def)             Requested size: 172.5pt x 129.37462pt.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 77.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 58.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) (./code/tsk1_1.m
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 9.
+)
+(./code/tsk1_1_a.m [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
+s/p1-1-a_std_hist.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 8.
+
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-) [3 <./images/p1-1-c_flat.png (PNG copy)> <./images/p1-1-c_non_flat.png (PNG c
-opy)>]
-Overfull \hbox (30.4036pt too wide) in paragraph at lines 43--45
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
+))
+<images/p1-1-c_flat.png, id=40, 562.1pt x 421.575pt>
+File: images/p1-1-c_flat.png Graphic file (type png)
 
-) <images/p1-2-a_closest_pixels.png, id=78, 817.0525pt x 631.35875pt>
+<use images/p1-1-c_flat.png>
+Package pdftex.def Info: images/p1-1-c_flat.png used on input line 82.
+(pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
+
+<images/p1-1-c_non_flat.png, id=41, 562.1pt x 421.575pt>
+File: images/p1-1-c_non_flat.png Graphic file (type png)
+
+<use images/p1-1-c_non_flat.png>
+Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 87.
+(pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
+ (./code/tsk1_1_c.m [2])
+<images/p1-2-a_closest_pixels.png, id=77, 800.9925pt x 644.4075pt>
 File: images/p1-2-a_closest_pixels.png Graphic file (type png)
 
 <use images/p1-2-a_closest_pixels.png>
-Package pdftex.def Info: images/p1-2-a_closest_pixels.png used on input line 84
-.
-(pdftex.def)             Requested size: 284.52756pt x 219.86136pt.
- [4] (./code/lr_predictor.m)
-(./code/rmse.m [5 <./images/p1-2-a_closest_pixels.png (PNG copy)>])
-(./code/tsk1_2_c.m
-Overfull \hbox (11.2034pt too wide) in paragraph at lines 29--30
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Package pdftex.def Info: images/p1-2-a_closest_pixels.png used on input line 10
+0.
+(pdftex.def)             Requested size: 284.52756pt x 228.90884pt.
+ [3 <./images/p1-1-c_flat.png (PNG copy)> <./images/p1-1-c_non_flat.png (PNG co
+py)>] (./code/lr_predictor.m)
+(./code/rmse.m) (./code/tsk1_2_c.m [4 <./images/p1-2-a_closest_pixels.png (PNG 
+copy)>]) <images/p1-2-c.png, id=158, 720.6925pt x 574.145pt>
+File: images/p1-2-c.png Graphic file (type png)
+
+<use images/p1-2-c.png>
+Package pdftex.def Info: images/p1-2-c.png used on input line 149.
+(pdftex.def)             Requested size: 284.52756pt x 226.66652pt.
+ [5 <./images/p1-2-c.png (PNG copy)>]
+<images/p1-3-a_5_30.png, id=198, 759.83875pt x 559.08875pt>
+File: images/p1-3-a_5_30.png Graphic file (type png)
+
+<use images/p1-3-a_5_30.png>
+Package pdftex.def Info: images/p1-3-a_5_30.png used on input line 161.
+(pdftex.def)             Requested size: 213.39568pt x 157.01299pt.
+
+<images/p1-3-a_5_30_another.png, id=199, 686.565pt x 489.83pt>
+File: images/p1-3-a_5_30_another.png Graphic file (type png)
+
+<use images/p1-3-a_5_30_another.png>
+Package pdftex.def Info: images/p1-3-a_5_30_another.png used on input line 166.
+
+(pdftex.def)             Requested size: 213.39568pt x 152.24185pt.
+
+<images/p1-3-a_1_20.png, id=200, 667.49374pt x 509.905pt>
+File: images/p1-3-a_1_20.png Graphic file (type png)
+
+<use images/p1-3-a_1_20.png>
+Package pdftex.def Info: images/p1-3-a_1_20.png used on input line 171.
+(pdftex.def)             Requested size: 213.39568pt x 163.00954pt.
+
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 160--175
+[]$[]$ $[]$ 
  []
 
-) <images/p1-2-c.png, id=150, 758.835pt x 614.295pt>
-File: images/p1-2-c.png Graphic file (type png)
- <use images/p1-2-c.png>
-Package pdftex.def Info: images/p1-2-c.png used on input line 133.
-(pdftex.def)             Requested size: 284.52756pt x 230.33192pt.
+(./code/tsk1_3_a.m [6 <./images/p1-3-a_5_30.png (PNG copy)> <./images/p1-3-a_5_
+30_another.png (PNG copy)> <./images/p1-3-a_1_20.png (PNG copy)>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 181.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 181.
 
-[6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
- [7 <./images/p1-2-c.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
- (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 140.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
+(./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 181.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 181.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: B789EA2430F1EDDB15D44ECA6ECD2C82;237.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
+(rerunfilecheck)             Checksum: B1892AED10B6AC891CF8B89B5B62CB95;321.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 181.
  ) 
 Here is how much of TeX's memory you used:
- 10508 strings out of 493089
- 150888 string characters out of 6134841
- 261704 words of memory out of 5000000
- 13701 multiletter control sequences out of 15000+600000
+ 11046 strings out of 493089
+ 158794 string characters out of 6134841
+ 271454 words of memory out of 5000000
+ 14176 multiletter control sequences out of 15000+600000
  19174 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,14n,43p,969b,1989s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
-exlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/tex
+ 36i,14n,43p,969b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive
@@ -876,10 +949,10 @@ st/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2015/texmf-dist
 /fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2015/texmf-dist/f
 onts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/courier/ucrr8a.pfb>
-Output written on report.pdf (7 pages, 638329 bytes).
+Output written on report.pdf (7 pages, 514278 bytes).
 PDF statistics:
- 283 PDF objects out of 1000 (max. 8388607)
- 251 compressed objects within 3 object streams
- 141 named destinations out of 1000 (max. 500000)
- 50 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 355 PDF objects out of 1000 (max. 8388607)
+ 319 compressed objects within 4 object streams
+ 192 named destinations out of 1000 (max. 500000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 

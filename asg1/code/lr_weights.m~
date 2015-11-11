@@ -1,3 +1,0 @@
-function w, predictor, rmse_tr, rmse_te = lr_predictor(x_tr, y_tr, x_te, y_te)
-    
-end

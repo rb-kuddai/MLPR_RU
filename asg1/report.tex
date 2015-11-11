@@ -12,11 +12,24 @@
 \usepackage{caption} % subfigure package
 \usepackage{subcaption} % subfigure package
 
+%page size
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	right=30mm,
+	left=30mm,
+	top=25mm,
+}
+
 \graphicspath{ {/images} } %path to images folder
 
 \setlength{\droptitle}{-10em}   % This is your set screw
 
 \newcommand{\vect}[1]{\boldsymbol{#1}} % to make vectors
+
+%front page
+\setlength{\droptitle}{2em}   % This is your set screw
 
 \def\subject{MACHINE LEARNING AND PATTERN RECOGNITION}
 \def\matricno{s1569105}
@@ -40,7 +53,9 @@
 				 		\label{fig:p1-1-a_std_hist}
 				 	\end{figure}
 				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate (after rounding using threshold) standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
-				 	From the \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. 
+				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. \\
+				 	Code snippet to plot histogram:
+				 	\lstinputlisting{code/tsk1_1_a.m}
 				\item
 					I would choose mean of the all the pixels (1032) above and to the left of target pixel as a simplest predictor of the target pixel value for flat patches. Given definition of flat patches the value of the pixel in the flat patch will be something like this $f(x) = const_{flat\ patch} + o(0, \sigma_{flat\ patch})$ where o is random and small in comparison to $const_{flat\ patch}$, and it has 0 mean and as $\sigma_{flat\ patch}$ its standard deviation which follows $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. In general, I would prefer median because it is more robust to outliers if our dataset is noisy but in our case pixels can take only discrete values and I will show that mean suits us.\\
 					Consider extreme case where after normalisation (all pixel values between 0 and 1) in our flat patch  most pixels are zeroes and small portion of pixels are ones (correspond to 63 intensity of original pixel). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
@@ -62,19 +77,20 @@
 				\item
 				 	\begin{figure}[t]
 				 		\caption{patch images}
+				 		\label{fig:patch_images}
 						\begin{subfigure}{0.5\textwidth}
 											      	\includegraphics[width=\linewidth]{images/p1-1-c_flat}
-											      	\caption{flat image, id 10974}
+											      	\caption{flat patch image}
 											      	\label{fig:flat_patch_image}
 						\end{subfigure}%
 						\begin{subfigure}{0.5\textwidth}
 											      	\includegraphics[width=\linewidth]{images/p1-1-c_non_flat}
-											      	\caption{non-flat image, id 805}
+											      	\caption{non-flat patch image}
 											      	\label{fig:non-flat_patch_image}
 						\end{subfigure}%
 				 	\end{figure}
-					 The code snippet for showing patch images on figure 2:
-				 	\lstinputlisting{code/tsk1_1.m} 
+					 Code snippet to show patch images on figure \ref{fig:patch_images}:
+				 	\lstinputlisting{code/tsk1_1_c.m} 
 			\end{enumerate}		
 		\subsection{Linear regression with adjacent pixels}
 			\begin{enumerate}[label=(\alph*)]
@@ -82,7 +98,7 @@
 				 	\begin{figure}[t]
 				 		\centering
 				 		\includegraphics[width=10cm]{images/p1-2-a_closest_pixels}
-				 		\caption{scatter plot of neighbour's pixels: x(j, end), x(j, end - 34), y(j)}
+				 		\caption{scatter plot of adjacent pixels. 5000 data points from xtr\_nf and ytr\_nf}
 				 		\label{fig:p1-2-a_closest_pixels}
 				 	\end{figure}
 					I used 5000 training points from xtr\_nf and ytr\_nf to plot figure \ref{fig:p1-2-a_closest_pixels}. From it we can see that x(j, end), x(j, end - 34), y(j) are strongly positively correlated. However, there is some relatively small number of deviations from this trend. It seems that these deviations are normally distributed so linear regression should be reasonable model to describe such data.
@@ -134,7 +150,32 @@
 				 		\caption{plot of the linear regression function after training along with test data points}
 				 		\label{fig:p1-2-c}
 				 	\end{figure}
-					This is not a typo, surprisingly my performance is a bit better on the test set. That is why we can conclude that linear regression is not overfitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between closest neighbours of the target value pixel. 
+					This is not a typo, surprisingly my performance is a bit better on the test set. That is why we can conclude that linear regression is not over-fitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between adjacent pixels and target value pixel. 
 			\end{enumerate}
+		\subsection{RBF regression with adjacent pixels}
+			\begin{enumerate}[label=(\alph*)]
+				\item
+				 	\begin{figure}[t]
+				 		\caption{Root Mean Square Error against number of radial basis functions used}
+				 		\begin{subfigure}{0.5\textwidth}
+				 			\includegraphics[width=\linewidth]{images/p1-3-a_5_30.png}
+				 			\caption{}
+				 			\label{fig:p-1-3-a_a}
+			 			\end{subfigure}
+				 		\begin{subfigure}{0.5\textwidth}
+				 			\includegraphics[width=\linewidth]{images/p1-3-a_5_30_another.png}
+				 			\caption{}
+				 			\label{fig:p-1-3-a_b}
+				 		\end{subfigure}\\
+				 		\begin{subfigure}{0.5\textwidth}
+				 			\includegraphics[width=\linewidth]{images/p1-3-a_1_20.png}
+				 			\caption{}
+				 			\label{fig:p-1-3-a_c}
+				 		\end{subfigure}
 
+				 	\end{figure}	
+				 	When I ran cross validation procedure to determine which number of radial bases functions among \{ 5, 10, 15, 20, 25, 30\}  produces the best results, each time I received a different answer.  The figure \ref{fig:p-1-3-a_a} suggests 10 as the best number of radial bases functions and \ref{fig:p-1-3-a_b} proposes 5 as the best choice. This happens because matlab crossval uses random numbers each time to divide input set on training and validation sets. After that I launched the procedure for number of radial basis functions between 1 and 20, and I have realised that it was just a matter of scale. The figure \ref{fig:p-1-3-a_c} demonstrates that we achieve almost no improvement if we use more than 5 radial bases functions in this task. That is why I have chosen 5 as my number of radial basis functions because for the same efficiency it takes less time to compute.\\
+				 	Code snippet which I used in this task:
+				 	\lstinputlisting{code/tsk1_3_a.m}
+			\end{enumerate}
 \end{document}
