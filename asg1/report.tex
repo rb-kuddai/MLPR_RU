@@ -209,7 +209,7 @@
 					\hline
 				\end{tabular}
 			\end{center}
-			There is an improvement comparing with both previous methods but on the test set it is only quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of target pixel better, indeed, the most significant features are pixels adjacent to the target one.
+			There is an improvement comparing with both previous methods but on the test set it is quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of target pixel better, indeed, the most significant features are pixels adjacent to the target one.
 			Code snippet for this task:
 			\lstinputlisting{code/tsk1_4.m}
 		\subsection{Neural Network with all pixels}
@@ -224,12 +224,45 @@
 							\hline
 						\end{tabular}
 					\end{center}
-					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger.
+					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger.\\
 					Code snippet for this task:
 					\newpage
 					\lstinputlisting{code/tsk1_5_a.m}
 					
 				\item
-					
+					Neural Network RMSE for different random seeds:
+					\begin{center}
+						\begin{tabular}{| c | c | c |}
+							\hline
+							random seed & RMSE on training set & RMSE on test set\\ \hline
+							2015 & 0.0500 & 0.0515 \\ 
+							2016 & 0.0477 & 0.0504 \\ 
+							2017 & 0.0485 & 0.0515 \\ 
+							2018 & 0.0477 & 0.0516 \\ 
+							2019 & 0.0489 & 0.0527 \\
+							\hline
+						\end{tabular}
+					\end{center}
+					The average values for different random seeds are 0.0486 and 0.0515 for training and test sets respectively. In comparison to previous task 1.5.a the difference between training and test errors is much smaller in all cases because we are not using all the training instances for learning. At the same time, most likely due to the same reason, our performance on the training and test set has dropped. \\
+					Random seed determines to what local minimum NN will try to converge. That is why if we have a lower error on the training set then it is not guaranteed that our test error will be lower, as well. Runs with random seeds 2015 and 2019 are examples of this.\\
+					Code snippet for this task:
+					\lstinputlisting{code/tsk1_5_b.m}
 			\end{enumerate}
+		\subsection{Discussion}
+		 	\begin{figure}[t]
+		 		\centering
+		 		\includegraphics[width=17cm]{images/p1-6_num_pixels.png}
+		 		\caption{plot of linear regression RMSE depending on the number of pixels from the end  used as features.}
+		 		\label{fig:p1-6_num_pixels}
+		 	\end{figure}
+		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
+			\begin{center}
+				\begin{tabular}{| c | c | c |}
+					\hline
+					\, &  Test set \\ \hline
+					RMSE & 0.0419 \\ 
+					\hline
+				\end{tabular}
+			\end{center}
+			This result points out that this model is the best among considered so far. Also we can see that at the beginning figure \ref{fig:p1-6_num_pixels} has form similar to the step function. I describe it by the fact that with period of 35 we receive pixels which are above the target one and they give a lot of information about target pixels. This leads to conclusion that if image is 2d-array of pixels where i, j are indexes on the X and Y axis respectively then we should select pixels/features depending on their euclidean distance from the target pixel $r = \sqrt{(18 - i)^2 + (30 - j)^2}$
 \end{document}
