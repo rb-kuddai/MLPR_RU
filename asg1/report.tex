@@ -43,6 +43,8 @@
 
 \maketitle
 	\section{The Next Pixel Prediction Task}
+		\section*{Note} 
+			 For all code snippets in the part 1 it is assumed that I load imgregdata.mat file via matlab terminal before I ran the scripts.
 		\subsection{Data preprocessing and visualization}
 			 \begin{enumerate}[label=(\alph*)]
 			 	\item
@@ -53,14 +55,13 @@
 				 		\label{fig:p1-1-a_std_hist}
 				 	\end{figure}
 				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate (after rounding using threshold) standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
-				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. \\
+				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. \\
 				 	Code snippet to plot histogram:
-				 	\newpage
 				 	\lstinputlisting{code/tsk1_1_a.m}
 				 	
 				\item
-					I would choose mean of the all the pixels (1032) above and to the left of target pixel as a simplest predictor of the target pixel value for flat patches. Given definition of flat patches the value of the pixel in the flat patch will be something like this $f(x) = const_{flat\ patch} + o(0, \sigma_{flat\ patch})$ where o is random and small in comparison to $const_{flat\ patch}$, and it has 0 mean and as $\sigma_{flat\ patch}$ its standard deviation which follows $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. In general, I would prefer median because it is more robust to outliers if our dataset is noisy but in our case pixels can take only discrete values and I will show that mean suits us.\\
-					Consider extreme case where after normalisation (all pixel values between 0 and 1) in our flat patch  most pixels are zeroes and small portion of pixels are ones (correspond to 63 intensity of original pixel). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
+					I would chose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches $the intensity of the pixel_{i}$in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x_{all\ other\ pixels}})$ where o is small function in comparison to $const_{flat\ patch}$, and its mean and standard deviation over all pixels in the patch are 0 and as $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
+					The performance of this simple predictor can be estimated by considering extreme case when after normalisation (all pixel values between 0 and 1) most pixels are zeroes and small portion of pixels are ones (correspond to original intensity of 63). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
 						m < N - m\\
 						\mu = \frac{(N - m) * 0 + m * 1}{N} = \frac{m}{N}\\
@@ -75,7 +76,8 @@
 					\begin{gather*}
 						m = \frac{1032}{2}(1 - \sqrt{1 - 4 * 0.0635^2}) \approx 4.178
 					\end{gather*}
-					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original 63 pixel intensity) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. $round(0.0038/0.0156)=round(0.244)=0$ so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
+					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original pixel intensity of 63) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. $round(0.0038/0.0156)=round(0.244)=0$ so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
+				\newpage
 				\item
 				 	\begin{figure}[t]
 				 		\centering
@@ -93,7 +95,6 @@
 						\end{subfigure}%
 				 	\end{figure}
 					 Code snippet to show patch images on figure \ref{fig:patch_images}:
-					 \newpage
 				 	 \lstinputlisting{code/tsk1_1_c.m} 
 			\end{enumerate}		
 		\subsection{Linear regression with adjacent pixels}
@@ -158,6 +159,7 @@
 				 	\end{figure}
 					This is not a typo, surprisingly my performance is a bit better on the test set. That is why we can conclude that linear regression is not over-fitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between adjacent pixels and target value pixel. 
 			\end{enumerate}
+			\newpage
 		\subsection{RBF regression with adjacent pixels}
 			\begin{enumerate}[label=(\alph*)]
 				\item
@@ -182,7 +184,7 @@
 				 	\end{figure}	
 				 	Code snippet for this task:
 				 	\lstinputlisting{code/tsk1_3_a.m}
-				 	When I ran cross validation procedure to determine which number of radial bases functions among \{ 5, 10, 15, 20, 25, 30\}  produces the best results, each time I received a different answer.  The figure \ref{fig:p-1-3-a_a} suggests 10 as the best number of radial bases functions and \ref{fig:p-1-3-a_b} proposes 5 as the best choice. This happens because matlab crossval uses random numbers each time to divide input set on training and validation sets. After that I launched the procedure for number of radial basis functions between 1 and 20, and I have realised that it was just a matter of scale. The figure \ref{fig:p-1-3-a_c} demonstrates that we achieve almost no improvement if we use more than 5 radial bases functions in this task. That is why I have chosen 5 as my number of radial basis functions because for the same efficiency it takes less time to compute.
+				 	When I ran cross validation procedure to determine which number of radial bases functions among \{ 5, 10, 15, 20, 25, 30\}  produces the best results, each time I received a different answer.  The figure \ref{fig:p-1-3-a_a} suggests 5 as the best number of radial bases functions and \ref{fig:p-1-3-a_b} proposes 10 as the best choice. This happens probably due to the random numbers as matlab crossval uses them each time to divide input set on training and validation sets and rbf network initialises weights differently depending on the random numbers. After that I launched the procedure for number of radial basis functions between 1 and 20, and I have realised that it was just a matter of scale. The figure \ref{fig:p-1-3-a_c} demonstrates that we achieve almost no improvement if we use more than 5 radial bases functions in this task. That is why I have chosen 5 as my number of radial basis functions because for the same efficiency it takes less time to compute.
 				 	
 				 \item
 					the RMSE for test and training sets:
@@ -255,7 +257,13 @@
 		 		\caption{plot of linear regression RMSE depending on the number of pixels from the end  used as features.}
 		 		\label{fig:p1-6_num_pixels}
 		 	\end{figure}
-		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
+		 	\begin{figure}[t]
+		 		\centering
+		 		\includegraphics[width=17cm]{images/p1-6_closest_pixels.png}
+		 		\caption{plot of linear regression RMSE depending on the maximum distances from the target pixels within which pixels were  used as features.}
+		 		\label{fig:p1-6_closest_pixels}	
+		 	\end{figure}
+		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
 			\begin{center}
 				\begin{tabular}{| c | c | c |}
 					\hline
@@ -264,5 +272,28 @@
 					\hline
 				\end{tabular}
 			\end{center}
-			This result points out that this model is the best among considered so far. Also we can see that at the beginning figure \ref{fig:p1-6_num_pixels} has form similar to the step function. I describe it by the fact that with period of 35 we receive pixels which are above the target one and they give a lot of information about target pixels. This leads to conclusion that if image is 2d-array of pixels where i, j are indexes on the X and Y axis respectively then we should select pixels/features depending on their euclidean distance from the target pixel $r = \sqrt{(18 - i)^2 + (30 - j)^2}$
+			
+			This result shows improvement in comparison to the previous models. Also we can see that at the beginning figure \ref{fig:p1-6_num_pixels} has form similar to the step function. I describe it by the fact that with period of 35 we receive pixels which are above the target one and they give a lot of information about target pixels. This leads to conclusion that if image is 2d-array of pixels where i, j are indexes on the X and Y axis respectively then we should select pixels/features depending on their euclidean distance from the target pixel $r = \sqrt{(18 - i)^2 + (30 - j)^2}$. \\
+			Code snippet to get the closest pixels:
+			\lstinputlisting{code/closest_pixels.m}
+			
+			 I have performed cross-validation on the training set to find best such distance, the results are on figure \ref{fig:p1-6_closest_pixels}. It points out that the best distance is 4, and after checking it on the test set:
+			\begin{center}
+				\begin{tabular}{| c | c | c |}
+					\hline
+					\, &  Test set \\ \hline
+					RMSE & 0.0412 \\ 
+					\hline
+				\end{tabular}
+			\end{center}
+			This the best result among the models considered and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
+			Code snippet to plot figure \ref{fig:p1-6_num_pixels}:
+			\lstinputlisting{code/tsk1_6_1.m}
+			Code snippet to get performance on the test set using 120 pixels from the end:
+			\lstinputlisting{code/tsk1_6_2.m}
+			Code snippet to plot figure \ref{fig:p1-6_closest_pixels}:
+			\lstinputlisting{code/tsk1_6_3.m}
+			Code snippet to get performance on the test set with pixels within radius 4 from target one:
+			\lstinputlisting{code/tsk1_6_4.m}
+			\newpage
 \end{document}

@@ -1,5 +1,3 @@
-%load imgregdata.mat % I do it via terminal
-
 %launch via - tsk1_2_a(xtr_nf, ytr_nf)
 function [] = tsk1_2_a(xtr_nf, ytr_nf)
     %I choose 5000 so plot doesn't look cluttered

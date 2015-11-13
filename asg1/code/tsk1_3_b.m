@@ -1,7 +1,4 @@
-%load imgregdata.mat % I do it via terminal
-
-%launched via
-%tsk1_3_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
+%launch via - tsk1_3_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
 function [] = tsk1_3_b(x_all_train, t_train, x_all_test, t_test)
     %t - means target values
     get_adjacent_pixels = @(x) [x(:, 1032), x(:, 1032 - 34)];

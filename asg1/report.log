@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  12 NOV 2015 12:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  13 NOV 2015 21:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -838,140 +838,154 @@ Package caption Info: End \AtBeginDocument code.
 File: images/p1-1-a_std_hist.png Graphic file (type png)
 
 <use images/p1-1-a_std_hist.png>
-Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 51.
+Package pdftex.def Info: images/p1-1-a_std_hist.png used on input line 53.
 (pdftex.def)             Requested size: 341.43306pt x 256.07324pt.
  [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
 s/p1-1-a_std_hist.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 59.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 60.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 (./code/tsk1_1_a.m
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 10.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 8.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-))
-<images/p1-1-c_flat.png, id=52, 562.1pt x 421.575pt>
+)) [2]
+<images/p1-1-c_flat.png, id=74, 562.1pt x 421.575pt>
 File: images/p1-1-c_flat.png Graphic file (type png)
 
 <use images/p1-1-c_flat.png>
-Package pdftex.def Info: images/p1-1-c_flat.png used on input line 85.
+Package pdftex.def Info: images/p1-1-c_flat.png used on input line 87.
 (pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
 
-<images/p1-1-c_non_flat.png, id=53, 562.1pt x 421.575pt>
+<images/p1-1-c_non_flat.png, id=75, 562.1pt x 421.575pt>
 File: images/p1-1-c_non_flat.png Graphic file (type png)
 
 <use images/p1-1-c_non_flat.png>
-Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 90.
+Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 92.
 (pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
- [2] (./code/tsk1_1_c.m)
-<images/p1-2-a_closest_pixels.png, id=78, 672.5125pt x 485.815pt>
+ (./code/tsk1_1_c.m)
+<images/p1-2-a_closest_pixels.png, id=77, 672.5125pt x 485.815pt>
 File: images/p1-2-a_closest_pixels.png Graphic file (type png)
 
 <use images/p1-2-a_closest_pixels.png>
 Package pdftex.def Info: images/p1-2-a_closest_pixels.png used on input line 10
-4.
+5.
 (pdftex.def)             Requested size: 284.52756pt x 205.53831pt.
  (./code/tsk1_2_a.m [3 <./images/p1-1-c_flat.png (PNG copy)> <./images/p1-1-c_n
 on_flat.png (PNG copy)>])
-(./code/cs_linear_regression.m) [4 <./images/p1-2-a_closest_pixels.png (PNG cop
-y)>] (./code/cs_rmse.m) (./code/tsk1_2_c.m)
-<images/p1-2-c.png, id=169, 689.57625pt x 515.9275pt>
+(./code/cs_linear_regression.m) (./code/cs_rmse.m [4 <./images/p1-2-a_closest_p
+ixels.png (PNG copy)>]) (./code/tsk1_2_c.m)
+<images/p1-2-c.png, id=165, 689.57625pt x 515.9275pt>
 File: images/p1-2-c.png Graphic file (type png)
  <use images/p1-2-c.png>
-Package pdftex.def Info: images/p1-2-c.png used on input line 155.
+Package pdftex.def Info: images/p1-2-c.png used on input line 156.
 (pdftex.def)             Requested size: 284.52756pt x 212.87782pt.
 
-<images/p1-3-a_5_30.png, id=171, 759.83875pt x 559.08875pt>
+[5] <images/p1-3-a_5_30.png, id=218, 562.1pt x 421.575pt>
 File: images/p1-3-a_5_30.png Graphic file (type png)
 
 <use images/p1-3-a_5_30.png>
-Package pdftex.def Info: images/p1-3-a_5_30.png used on input line 167.
-(pdftex.def)             Requested size: 213.39568pt x 157.01299pt.
+Package pdftex.def Info: images/p1-3-a_5_30.png used on input line 169.
+(pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
 
-<images/p1-3-a_5_30_another.png, id=172, 686.565pt x 489.83pt>
+<images/p1-3-a_5_30_another.png, id=219, 591.20876pt x 410.53375pt>
 File: images/p1-3-a_5_30_another.png Graphic file (type png)
 
 <use images/p1-3-a_5_30_another.png>
-Package pdftex.def Info: images/p1-3-a_5_30_another.png used on input line 172.
+Package pdftex.def Info: images/p1-3-a_5_30_another.png used on input line 174.
 
-(pdftex.def)             Requested size: 213.39568pt x 152.24185pt.
+(pdftex.def)             Requested size: 213.39568pt x 148.18042pt.
 
-<images/p1-3-a_1_20.png, id=173, 667.49374pt x 509.905pt>
+<images/p1-3-a_1_20.png, id=220, 562.1pt x 421.575pt>
 File: images/p1-3-a_1_20.png Graphic file (type png)
 
 <use images/p1-3-a_1_20.png>
-Package pdftex.def Info: images/p1-3-a_1_20.png used on input line 177.
-(pdftex.def)             Requested size: 213.39568pt x 163.00954pt.
+Package pdftex.def Info: images/p1-3-a_1_20.png used on input line 179.
+(pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 166--181
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 168--183
 []$[]$ $[]$ 
  []
 
-(./code/tsk1_3_a.m [5]) [6 <./images/p1-2-c.png (PNG copy)>] (./code/tsk1_3_a.m
+(./code/tsk1_3_a.m) [6 <./images/p1-2-c.png (PNG copy)>] (./code/tsk1_3_a.m
 [7 <./images/p1-3-a_5_30.png (PNG copy)> <./images/p1-3-a_5_30_another.png (PNG
  copy)> <./images/p1-3-a_1_20.png (PNG copy)>]) (./code/tsk1_4.m) [8]
 (./code/tsk1_5_a.m) (./code/tsk1_5_b.m
-Overfull \hbox (15.81293pt too wide) in paragraph at lines 18--20
+Overfull \hbox (15.81293pt too wide) in paragraph at lines 15--17
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) <images/p1-6_num_pixels.png, id=349, 978.65625pt x 598.235pt>
+) <images/p1-6_num_pixels.png, id=340, 978.65625pt x 598.235pt>
 File: images/p1-6_num_pixels.png Graphic file (type png)
 
 <use images/p1-6_num_pixels.png>
-Package pdftex.def Info: images/p1-6_num_pixels.png used on input line 254.
+Package pdftex.def Info: images/p1-6_num_pixels.png used on input line 256.
 (pdftex.def)             Requested size: 483.69684pt x 295.67538pt.
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 254--255
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 256--257
  [][] 
  []
 
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
- [10 <./images/p1-6_num_pixels.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
+<images/p1-6_closest_pixels.png, id=341, 975.645pt x 574.145pt>
+File: images/p1-6_closest_pixels.png Graphic file (type png)
+
+<use images/p1-6_closest_pixels.png>
+Package pdftex.def Info: images/p1-6_closest_pixels.png used on input line 262.
+
+(pdftex.def)             Requested size: 483.69684pt x 284.64507pt.
+
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 262--263
+ [][] 
+ []
+
+[9] (./code/closest_pixels.m) [10 <./images/p1-6_num_pixels.png (PNG copy)>]
+(./code/tsk1_6_1.m) (./code/tsk1_6_2.m [11 <./images/p1-6_closest_pixels.png (P
+NG copy)>]) (./code/tsk1_6_3.m) (./code/tsk1_6_4.m) [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 7D2F8CD2289C88FF08A0A19A72C24973;541.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 268.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
  ) 
 Here is how much of TeX's memory you used:
- 11226 strings out of 493089
- 161524 string characters out of 6134841
- 286581 words of memory out of 5000000
- 14211 multiletter control sequences out of 15000+600000
+ 11346 strings out of 493089
+ 163372 string characters out of 6134841
+ 283744 words of memory out of 5000000
+ 14238 multiletter control sequences out of 15000+600000
  19950 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,14n,43p,969b,1961s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,14n,43p,1011b,1961s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/te
-xmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2015/texm
-f-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2015/texmf-
-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2015/texmf-di
-st/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2015/texmf-dist
-/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2015/texmf-dist/f
-onts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2015/texmf-dist/fon
-ts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2015/texmf-dist/fonts
-/type1/urw/courier/ucrr8a.pfb>
-Output written on report.pdf (10 pages, 524320 bytes).
+/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2015/texmf-di
+st/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2015/texmf-dist
+/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2015/texmf-dist/f
+onts/type1/urw/courier/ucrr8a.pfb>
+Output written on report.pdf (12 pages, 562086 bytes).
 PDF statistics:
- 537 PDF objects out of 1000 (max. 8388607)
- 495 compressed objects within 5 object streams
- 321 named destinations out of 1000 (max. 500000)
- 102 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 645 PDF objects out of 1000 (max. 8388607)
+ 598 compressed objects within 6 object streams
+ 398 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 

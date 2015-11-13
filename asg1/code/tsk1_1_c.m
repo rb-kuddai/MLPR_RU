@@ -1,5 +1,3 @@
-%load imgregdata.mat % I do it via terminal
-
 %launch via tsk1_1_c(xtr)
 function [] = tsk1_1_c(xtr)
     %normalising

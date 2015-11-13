@@ -1,5 +1,3 @@
-%load imgregdata.mat % I do it via terminal
-
 %launch via - tsk1_1_a(xtr)
 function [] = tsk1_1_a(xtr)
     patches = xtr ./ 63;

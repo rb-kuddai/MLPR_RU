@@ -1,6 +1,4 @@
-%load imgregdata.mat % I do it via terminal
-
-%launched via 
+%launch via 
 %tsk1_3_a(xtr_nf, ytr_nf, 5:5:30)
 %and
 %tsk1_3_a(xtr_nf, ytr_nf, 1:20)
@@ -24,17 +22,19 @@ function [] = tsk1_3_a(x_all, t, num_rbfs)
         regf = @rbf_reg;
     end
     
-    rbfs_rmse = zeros(1, length(num_rbfs));
+    errors = zeros(1, length(num_rbfs));
     
     for i = 1:length(num_rbfs)
         num_rbf = num_rbfs(i);
         regf = create_rbf_regf(num_rbf);
         %default CV 10 folds 
         cvMse = crossval('mse', x, t,'predfun',regf);
-        rbfs_rmse(i) = cvMse ^ 0.5;
+        errors(i) = cvMse ^ 0.5;
     end
     
-    plot(num_rbfs, rbfs_rmse)
+    plot(num_rbfs, errors)
+    hold on;
+    plot(num_rbfs, errors, 'r*');
     xlabel('number of rbf used');
     ylabel('Root Mean Square Error');
     set(gca,'FontSize', 18);

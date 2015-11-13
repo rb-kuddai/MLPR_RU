@@ -1,7 +1,4 @@
-%load imgregdata.mat % I do it via terminal
-
-%launched via 
-%tsk1_5_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
+%launched via - tsk1_5_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
 function [] = tsk1_5_b(x_train, t_train, x_test, t_test)
     %t - means target values
     nhid = 10; % number of hidden units

@@ -1,5 +1,3 @@
-%load imgregdata.mat % I do it via terminal
-
 %launch via - tsk1_4(xtr_nf, ytr_nf, xte_nf, yte_nf)
 function [] = tsk1_4(x_train, t_train, x_test, t_test)
     %t - means target values
