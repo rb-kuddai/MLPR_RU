@@ -127,9 +127,9 @@
 					\end{gather*}
 					where N is a number of training data points and x is our dataset (it will be xtr\_nf in the next task)
 				\item
-					code snippet to get linear regression predictor:
+					code snippet to get linear regression predictor (will be used afterwards):
 					\lstinputlisting{code/cs_linear_regression.m} 
-					code snippet to compute root mean square error (RMSE):
+					code snippet to compute root mean square error (RMSE) (will be used afterwards):
 					\lstinputlisting{code/cs_rmse.m}
 					code snippet for this task:
 					\lstinputlisting{code/tsk1_2_c.m}
@@ -265,7 +265,7 @@
 		 	\end{figure}
 		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
 			\begin{center}
-				\begin{tabular}{| c | c | c |}
+				\begin{tabular}{| c | c | }
 					\hline
 					\, &  Test set \\ \hline
 					RMSE & 0.0419 \\ 
@@ -275,18 +275,18 @@
 			
 			This result shows improvement in comparison to the previous models. Also we can see that at the beginning figure \ref{fig:p1-6_num_pixels} has form similar to the step function. I describe it by the fact that with period of 35 we receive pixels which are above the target one and they give a lot of information about target pixels. This leads to conclusion that if image is 2d-array of pixels where i, j are indexes on the X and Y axis respectively then we should select pixels/features depending on their euclidean distance from the target pixel $r = \sqrt{(18 - i)^2 + (30 - j)^2}$. \\
 			Code snippet to get the closest pixels:
-			\lstinputlisting{code/closest_pixels.m}
+			\lstinputlisting{code/get_closest_pixels.m}
 			
 			 I have performed cross-validation on the training set to find best such distance, the results are on figure \ref{fig:p1-6_closest_pixels}. It points out that the best distance is 4, and after checking it on the test set:
 			\begin{center}
-				\begin{tabular}{| c | c | c |}
+				\begin{tabular}{| c | c |}
 					\hline
 					\, &  Test set \\ \hline
 					RMSE & 0.0412 \\ 
 					\hline
 				\end{tabular}
 			\end{center}
-			This the best result among the models considered and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
+			This is the best result among the models considered and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
 			Code snippet to plot figure \ref{fig:p1-6_num_pixels}:
 			\lstinputlisting{code/tsk1_6_1.m}
 			Code snippet to get performance on the test set using 120 pixels from the end:
@@ -296,4 +296,26 @@
 			Code snippet to get performance on the test set with pixels within radius 4 from target one:
 			\lstinputlisting{code/tsk1_6_4.m}
 			\newpage
+			
+		\section{Robust modelling}
+			\section*{Note}
+				It is assumed that I have loaded the code from \href{http://www.inf.ed.ac.uk/teaching/courses/mlpr/2015/assignment/part2_code_data.tar.gz}{part2\_code\_data.tar.gz} in my matlab environment. I have also taken professor Iain Murray code from MLPR tutorial 5 to produce error bars - \href{http://homepages.inf.ed.ac.uk/imurray2/code/imurray-matlab/errorbar_str.m}{errobar\_str.m}. text\_data.mat is assumed to be loaded as well.
+			\subsection{Fitting the baseline model}
+				\begin{enumerate}[label=(\alph*)]
+					\item 
+						The code snippet to add bias term:
+						\lstinputlisting{code/tsk2_1_a.m}
+					\item
+						I have received the following results:
+						\begin{center}
+							\begin{tabular}{| c | c | c |}
+								\hline
+								\, &  Test set \\ \hline
+								RMSE & 0.0412 \\ 
+								\hline
+							\end{tabular}
+						\end{center}
+				\end{enumerate}
+				
+				
 \end{document}

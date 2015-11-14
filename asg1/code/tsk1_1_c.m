@@ -5,9 +5,9 @@ function [] = tsk1_1_c(xtr)
     patches_std = std(patches,0,2);
 
     %the threshold 4/63 is taken from the task 
-    split_threshold = ones(size(patches_std)) .* 4/63;
-    flat_patches_ids     = bsxfun(@le, patches_std, split_threshold);
-    non_flat_patches_ids = bsxfun(@gt, patches_std, split_threshold);
+    flat_threshold = 4/63;
+    flat_patches_ids     = patches_std <= flat_threshold;
+    non_flat_patches_ids = patches_std >  flat_threshold;
 
     %split on flat and non-flat patches
     flat_patches     = patches(flat_patches_ids, :);

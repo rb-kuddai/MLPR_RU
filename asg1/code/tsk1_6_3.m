@@ -12,7 +12,7 @@ function [] = tsk1_6_3(x_all_train, t)
     
     for i = 1:length(max_distances)
         max_dist = max_distances(i)
-        x = closest_pixels(x_all_train, max_dist);
+        x = get_closest_pixels(x_all_train, max_dist);
         %to see complexity of the model
         size(x)
         %default 10 fold

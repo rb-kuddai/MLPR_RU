@@ -1,4 +1,4 @@
-function x = closest_pixels(x_all, maximum_distance)
+function x = get_closest_pixels(x_all, maximum_distance)
     function accepted = filter(vector_index)
         i = mod(vector_index, 35);
         j = vector_index / 35;
