@@ -1,6 +1,5 @@
-%lauch via
+%launch via:
 % b) tsk2_1_bc(x_train, y_train, x_test, y_test)
-% and 
 % c) tsk2_1_bc(x_train, y_train, x_test, y_test, 100)
 function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     %default parameters
@@ -10,9 +9,8 @@ function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     else
         train_limit = varargin{1}
     end
-    
-    %logistic regression function
-    lr = @(ww, xx, yy) 1./(1 + exp(-yy.*(xx*ww)));
+   
+    lr = @(ww, xx, yy) 1./(1 + exp(-yy.*(xx*ww))); %logistic regression function
     
     function [] = report(ww, xx, yy, type_str)
         sigmas = lr(ww, xx, yy);
@@ -35,6 +33,6 @@ function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     end
 
     weights = train_lr(x_train(1:train_limit, :), y_train(1:train_limit, :));
-    report(weights, x_train, y_train, 'training set');
+    report(weights, x_train(1:train_limit, :), y_train(1:train_limit, :), 'training set');
     report(weights, x_test,  y_test,  'test set');
 end

@@ -1,7 +1,6 @@
 %launch via - tsk1_6_1(xtr_nf, ytr_nf)
 function [] = tsk1_6_1(x_all_train, t)
     %t - means target values
-    
     function y_test = regf(x_train, t_train, x_test)
        [w, predictor] = cs_linear_regression(x_train, t_train);
        y_test = predictor(x_test);

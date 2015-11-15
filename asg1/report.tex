@@ -11,6 +11,7 @@
 \usepackage{graphicx} %package to manage images
 \usepackage{caption} % subfigure package
 \usepackage{subcaption} % subfigure package
+\usepackage{array} %for table formatting
 
 %page size
 \usepackage{geometry}
@@ -253,13 +254,13 @@
 		\subsection{Discussion}
 		 	\begin{figure}[t]
 		 		\centering
-		 		\includegraphics[width=17cm]{images/p1-6_num_pixels.png}
+		 		\includegraphics[width=16cm]{images/p1-6_num_pixels.png}
 		 		\caption{plot of linear regression RMSE depending on the number of pixels from the end  used as features.}
 		 		\label{fig:p1-6_num_pixels}
 		 	\end{figure}
 		 	\begin{figure}[t]
 		 		\centering
-		 		\includegraphics[width=17cm]{images/p1-6_closest_pixels.png}
+		 		\includegraphics[width=16cm]{images/p1-6_closest_pixels.png}
 		 		\caption{plot of linear regression RMSE depending on the maximum distances from the target pixels within which pixels were  used as features.}
 		 		\label{fig:p1-6_closest_pixels}	
 		 	\end{figure}
@@ -306,15 +307,53 @@
 						The code snippet to add bias term:
 						\lstinputlisting{code/tsk2_1_a.m}
 					\item
-						I have received the following results:
+						The code snippet for this and next task:
+						\lstinputlisting{code/tsk2_1_bc.m}
+						I have received the following results with standard errors:
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
 								\hline
-								\, &  Test set \\ \hline
-								RMSE & 0.0412 \\ 
+								\, &  Training set & Test set \\ \hline
+								Accuracy & $0.8335 \pm 0.0046$ & $0.9071 \pm 0.0072$ \\ \hline
+								Mean log probability & $-0.4398 \pm 0.0081 $ & $-0.300 \pm 0.012 $\\
 								\hline
 							\end{tabular}
 						\end{center}
+						Not a typo, my performance was better on the test set. The log probability of the baseline line for each input is $log(P(y | x)) = log(0.5) = -0.6931$. The good results should be quite confident so probability should be close to 1 and $log(P_{good}) \approx log(1) = 0$. As we can see our mean log probability in both training and test sets are closer to 0 than those of simple baseline which implies that our performance is better than performance of baseline.
+						
+					\item
+						For limited number of training examples, my result are:
+						\begin{center}
+							\begin{tabular}{| c | c | c |}
+								\hline
+								\, &  Training set & Test set \\ \hline
+								Accuracy & $0.990 \pm 0.010 $ & $0.742 \pm 0.011$ \\ \hline
+								Mean (average) log probability & $-0.0139 \pm 0.0098$ & $-10.25 \pm 0.65 $\\
+								\hline
+							\end{tabular}
+						\end{center}
+						From the table it can be seen that when the training data is very limited (N = 100) then linear regression fits the training data too well, which results in learning the noise in the data. That is why it has extremely good accuracy and mean log probability close to zero on the training set. On other hand, the result on the test set is much worse in comparison to the previous task.  The mean log probability is far below the log probability of simple baseline ($log(P(y | x)) = log(0.5) = -0.6931$) which implies that in some cases our predictor gives extremely low chances (close to zero) to the right label from the test set.
+				\end{enumerate}
+			\subsection{Label noise model}
+				\begin{enumerate}[label=(\alph*)]
+					\item 
+						The events $s_{n}=1$ and $s_{n}=0$ are mutually exclusive and together they are collectively exhaustive events and also  $s_{n}$ is independent from $\vect{x},\ \vect{w},\ y$ that is why:
+						\begin{align*}
+							P(s_{n}=1) &= 1 - \epsilon \quad P(s_{n}=0)=\epsilon\\
+							P_{uniform}(y) &= \frac{1}{size(\{-1, +1\})}=\frac{1}{2}\\
+							P(y|\vect{x},\vect{w}) &= \sigma(y\vect{w}^{T}\vect{x})\\
+							P(y|\vect{x}, \vect{w}, \epsilon) &= P(s_{n}=1)P(y|\vect{x},\vect{w}) + P(s_{n}=0)P_{uniform}(y)=\\
+							&=(1-\epsilon)\sigma(y\vect{w}^{T}\vect{x}) + \frac{\epsilon}{2}
+							%P(y|\vect{x},\ \vect{w},) 
+							%= P(s_{n}=1)P(y|\vect{x},\ \vect{w}) + P(s_{n}=0)P_{uniform}(y)
+						\end{align*}
+					
+					\item
+						\begin{align*}
+							L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}log(P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)) = 
+							 \sum_{n=1}^{N}log((1-\epsilon)\sigma(y^{(n)}\vect{x}^{(n)T}\vect{w}) + \frac{\epsilon}{2})  \\
+							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}\frac{\sigma^2(y^{(n)}\vect{x}^{(n)T}\vect{w}) exp(-y^{(n)}\vect{x}^{(n)T}\vect{w}) y^{(n)}\vect{x}^{(n)T}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}
+						\end{align*}
 				\end{enumerate}
 				
 				
