@@ -3,7 +3,7 @@
 % c) tsk2_1_bc(x_train, y_train, x_test, y_test, 100)
 function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     %default parameters
-    MAX_LIN_SEARCHES = 5000;
+    MAX_LIN_SEARCHES = 8000;
     if length(varargin) == 0
         train_limit = size(x_train, 1)
     else

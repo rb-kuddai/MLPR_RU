@@ -45,7 +45,7 @@
 \maketitle
 	\section{The Next Pixel Prediction Task}
 		\section*{Note} 
-			 For all code snippets in the part 1 it is assumed that I load imgregdata.mat file via matlab terminal before I ran the scripts.
+			 For all code snippets in the part 1 it is assumed that I have loaded imgregdata.mat file via matlab terminal before I ran the scripts. For the tasks starting from 1.3 it is also assumed that I have loaded NetLab and welltrainedMLP.mat file.\\ I don't calculate RMSE upper and lower bounds for cross-validation because it is quite difficult to achieve this with default matlab crossval function. But in such cases I report RMSE with bounds on the test set.
 		\subsection{Data preprocessing and visualization}
 			 \begin{enumerate}[label=(\alph*)]
 			 	\item
@@ -55,20 +55,20 @@
 				 		\caption{histogram of standard deviations in the xtr dataset after normalisation}
 				 		\label{fig:p1-1-a_std_hist}
 				 	\end{figure}
-				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate (after rounding using threshold) standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
-				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation within 0 and 0.05 range, and 0.05 is quite small standard deviation, therefore, most of the patches are flat ones. \\
+				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
+				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation between 0 and 0.05. It can be confirmed from subtask c. 52739 patches which is more than 75\% of our initial dataset have standard deviation within 0 and 0.0635 range, and 0.0635 is quite small standard deviation. Therefore, most of the patches are flat ones. \\
 				 	Code snippet to plot histogram:
 				 	\lstinputlisting{code/tsk1_1_a.m}
 				 	
 				\item
-					I would chose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches $the intensity of the pixel_{i}$in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x_{all\ other\ pixels}})$ where o is small function in comparison to $const_{flat\ patch}$, and its mean and standard deviation over all pixels in the patch are 0 and as $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
+					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the i'th pixel in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x_{all\ other\ pixels}})$ where o is small function in comparison to $const_{flat\ patch}$, and its mean and standard deviation over all pixels in the patch are 0 and $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
 					The performance of this simple predictor can be estimated by considering extreme case when after normalisation (all pixel values between 0 and 1) most pixels are zeroes and small portion of pixels are ones (correspond to original intensity of 63). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
 						m < N - m\\
 						\mu = \frac{(N - m) * 0 + m * 1}{N} = \frac{m}{N}\\
-						\sigma^2 = (N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2 \\
+						\sigma^2 =\frac{1}{N}[(N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2]\\
 						= \frac{(N - m)m^2}{N^3} + \frac{m(N - m)^2}{N ^ 3}\\
-						N^3\sigma^2 = Nm^2 - m^3 + mN^2 - 2m^2N + m^3 \\
+						N^3\sigma^2 = m^2N - m^3 + mN^2 - 2m^2N + m^3 \\
 						= mN^2-m^2N\\
 						m^2 - mN + N^2\sigma^2 = 0\\
 						m = \frac{N}{2}(1 - \sqrt{1 - 4 \sigma ^ 2})\quad\text{(minus because our case is $m < N - m$ )}\\
@@ -128,13 +128,7 @@
 					\end{gather*}
 					where N is a number of training data points and x is our dataset (it will be xtr\_nf in the next task)
 				\item
-					code snippet to get linear regression predictor (will be used afterwards):
-					\lstinputlisting{code/cs_linear_regression.m} 
-					code snippet to compute root mean square error (RMSE) (will be used afterwards):
-					\lstinputlisting{code/cs_rmse.m}
-					code snippet for this task:
-					\lstinputlisting{code/tsk1_2_c.m}
-					after training the weights are:
+					After training the weights are:
 					\begin{center}
 						\begin{tabular}{| c | c | c |}
 							\hline
@@ -158,7 +152,15 @@
 				 		\caption{plot of the linear regression function after training along with test data points}
 				 		\label{fig:p1-2-c}
 				 	\end{figure}
-					This is not a typo, surprisingly my performance is a bit better on the test set. That is why we can conclude that linear regression is not over-fitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between adjacent pixels and target value pixel. 
+					Taking bounds into consideration we can see that the performance on training and test is almost the same. That is why we can conclude that linear regression is not over-fitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between adjacent pixels and target value pixel. \\
+					code snippet to get linear regression predictor (will also be used afterwards):
+					\lstinputlisting{code/cs_linear_regression.m} 
+					code snippet to compute root mean square error (RMSE) with bounds, which correspond to standard errors of mean square error(MSE)  (will also be used  afterwards):
+					\lstinputlisting{code/cs_rmse.m}
+					code snippet to show rmse on training and test set with bounds (will also be used  afterwards):
+					\lstinputlisting{code/show_rmse.m}
+					code snippet for this task:
+					\lstinputlisting{code/tsk1_2_c.m}
 			\end{enumerate}
 		\subsection{RBF regression with adjacent pixels}
 			\begin{enumerate}[label=(\alph*)]
@@ -182,10 +184,9 @@
 				 		\end{subfigure}
 
 				 	\end{figure}	
+				 	When I ran cross validation procedure to determine which number of radial bases functions among \{ 5, 10, 15, 20, 25, 30\} produces the best results, each time I received a different answer.  The figure \ref{fig:p-1-3-a_a} suggests 5 as the best number of radial bases functions and \ref{fig:p-1-3-a_b} proposes 10 as the best choice. This happens probably due to the random numbers as matlab crossval uses them each time to divide input set on training and validation sets and rbf network initialises weights differently depending on the random numbers. After that I launched the procedure for number of radial basis functions between 1 and 20, and I have realised that it was just a matter of scale. The figure \ref{fig:p-1-3-a_c} demonstrates that we achieve almost no improvement if we use more than 5 radial bases functions in this task. That is why I have chosen 5 as my number of radial basis functions because for the same efficiency it takes less time to compute.
 				 	Code snippet for this task:
 				 	\lstinputlisting{code/tsk1_3_a.m}
-				 	When I ran cross validation procedure to determine which number of radial bases functions among \{ 5, 10, 15, 20, 25, 30\}  produces the best results, each time I received a different answer.  The figure \ref{fig:p-1-3-a_a} suggests 5 as the best number of radial bases functions and \ref{fig:p-1-3-a_b} proposes 10 as the best choice. This happens probably due to the random numbers as matlab crossval uses them each time to divide input set on training and validation sets and rbf network initialises weights differently depending on the random numbers. After that I launched the procedure for number of radial basis functions between 1 and 20, and I have realised that it was just a matter of scale. The figure \ref{fig:p-1-3-a_c} demonstrates that we achieve almost no improvement if we use more than 5 radial bases functions in this task. That is why I have chosen 5 as my number of radial basis functions because for the same efficiency it takes less time to compute.
-				 	
 				 \item
 					the RMSE for test and training sets:
 					\begin{center}
@@ -196,9 +197,9 @@
 							\hline
 						\end{tabular}
 					\end{center}
-					As it can be seen that radial basis functions don't give any improvement in comparison to linear regression when both of them are using only adjacent pixels as features.
+					As it can be seen that radial basis functions don't give any noticeable improvement in comparison to linear regression when both of them are using only adjacent pixels as features.\\ \\ \\ \\
 				 	Code snippet for this task:
-				 	\lstinputlisting{code/tsk1_3_a.m}
+				 	\lstinputlisting{code/tsk1_3_b.m}
 			\end{enumerate}
 			 
 		\subsection{Linear regression with all pixels}
@@ -226,7 +227,7 @@
 							\hline
 						\end{tabular}
 					\end{center}
-					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger. In my opinion, this happens because NN with all pixels is very sophisticated model for our task.\\
+					In comparison to linear regression with all pixels Neural Network (NN) slightly over-fits the data because  its error is lower on training set but the error on test set is larger. In my opinion, this happens because NN with all pixels is very sophisticated model for our task.\\
 					Code snippet for this task:
 					\lstinputlisting{code/tsk1_5_a.m}
 					
@@ -235,17 +236,17 @@
 					\begin{center}
 						\begin{tabular}{| c | c | c |}
 							\hline
-							random seed & RMSE on training set & RMSE on test set\\ \hline
-							2015 & 0.0500 & 0.0515 \\ 
-							2016 & 0.0477 & 0.0504 \\ 
-							2017 & 0.0485 & 0.0515 \\ 
-							2018 & 0.0477 & 0.0516 \\ 
-							2019 & 0.0489 & 0.0527 \\
+							random seed & RMSE on full training set & RMSE on test set\\ \hline
+							2015 & $0.0500 \pm 0.0009$ & $0.0515 \pm 0.0014$ \\ 
+							2016 & $0.0477 \pm 0.0009$ & $0.0504 \pm 0.0014$ \\ 
+							2017 & $0.0485 \pm 0.0009$ & $0.0515 \pm 0.0014$ \\ 
+							2018 & $0.0477 \pm 0.0009$ & $0.0516 \pm 0.0014$ \\ 
+							2019 & $0.0489 \pm 0.0009$ & $0.0527 \pm 0.0016$ \\
 							\hline
 						\end{tabular}
 					\end{center}
-					The average values for different random seeds are 0.0486 and 0.0515 for training and test sets respectively. In comparison to previous task 1.5.a the difference between training and test errors is much smaller in all cases because we are not using all the training instances for learning. At the same time, most likely due to the same reason, our performance on the training and test set has dropped. \\
-					Random seed determines to what local minimum NN will try to converge. That is why if we have a lower error on the training set then it is not guaranteed that our test error will be lower, as well. Runs with random seeds 2015 and 2019 are examples of this.\\
+					In comparison to previous task 1.5.a the difference between training and test errors is much smaller in all cases because we are using only 5000 instances from training set for learning. At the same time, most likely due to the same reason, our performance on the training and test set has dropped. \\
+					Random seed determines to what local minimum NN will try to converge and the starting point from which it will try to converge. So depending on random seeds some runs will converge faster than others. It explains why our results differ but taking bounds into consideration our performance on the test set is roughly the same for all runs.\\
 					Code snippet for this task:
 					\lstinputlisting{code/tsk1_5_b.m}
 			\end{enumerate}
@@ -262,34 +263,33 @@
 		 		\caption{plot of linear regression RMSE depending on the maximum distances from the target pixels within which pixels were  used as features.}
 		 		\label{fig:p1-6_closest_pixels}	
 		 	\end{figure}
-		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step (100) because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
+		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step (100) because otherwise cross-validation would take too much time.\\ Figure suggests that the best value from the end is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
 			\begin{center}
 				\begin{tabular}{| c | c | }
 					\hline
 					\, &  Test set \\ \hline
-					RMSE & 0.0419 \\ 
+					RMSE & $0.0419 \pm 0.0017$ \\ 
 					\hline
 				\end{tabular}
 			\end{center}
 			
 			This result shows improvement in comparison to the previous models. Also we can see that at the beginning figure \ref{fig:p1-6_num_pixels} has form similar to the step function. I describe it by the fact that with period of 35 we receive pixels which are above the target one and they give a lot of information about target pixels. This leads to conclusion that if image is 2d-array of pixels where i, j are indexes on the X and Y axis respectively then we should select pixels/features depending on their euclidean distance from the target pixel $r = \sqrt{(18 - i)^2 + (30 - j)^2}$. \\
-			Code snippet to get the closest pixels:
-			\lstinputlisting{code/get_closest_pixels.m}
-			
-			 I have performed cross-validation on the training set to find best such distance, the results are on figure \ref{fig:p1-6_closest_pixels}. It points out that the best distance is 4, and after checking it on the test set:
+			 I have performed cross-validation on the training set to find the best such distance $r$, the results are on figure \ref{fig:p1-6_closest_pixels}. It points out that the best distance is 4, and after checking it on the test set:
 			\begin{center}
 				\begin{tabular}{| c | c |}
 					\hline
 					\, &  Test set \\ \hline
-					RMSE & 0.0412 \\ 
+					RMSE & $0.0412 \pm 0.0017$ \\ 
 					\hline
 				\end{tabular}
 			\end{center}
-			This is the best result among the models considered and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
+			This is good result and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
 			Code snippet to plot figure \ref{fig:p1-6_num_pixels}:
 			\lstinputlisting{code/tsk1_6_1.m}
 			Code snippet to get performance on the test set using 120 pixels from the end:
 			\lstinputlisting{code/tsk1_6_2.m}
+			Code snippet to get the closest pixels:
+			\lstinputlisting{code/get_closest_pixels.m}
 			Code snippet to plot figure \ref{fig:p1-6_closest_pixels}:
 			\lstinputlisting{code/tsk1_6_3.m}
 			Code snippet to get performance on the test set with pixels within radius 4 from target one:
@@ -301,10 +301,12 @@
 				It is assumed that I have loaded the code from \href{http://www.inf.ed.ac.uk/teaching/courses/mlpr/2015/assignment/part2_code_data.tar.gz}{part2\_code\_data.tar.gz} in my matlab environment. I have also taken professor Iain Murray code from MLPR tutorial 5 to produce error bars - \href{http://homepages.inf.ed.ac.uk/imurray2/code/imurray-matlab/errorbar_str.m}{errobar\_str.m}. text\_data.mat is assumed to be loaded as well.
 			\subsection{Fitting the baseline model}
 				\begin{enumerate}[label=(\alph*)]
-					\item 
+					\item
+						\textbf{Bias feature} \\
 						The code snippet to add bias term:
 						\lstinputlisting{code/tsk2_1_a.m}
 					\item
+						\textbf{ Maximizing the likelihood} \\
 						The code snippet for this and next task:
 						\lstinputlisting{code/tsk2_1_bc.m}
 						I have received the following results with standard errors:
@@ -317,20 +319,21 @@
 								\hline
 							\end{tabular}
 						\end{center}
-						Not a typo, my performance was better on the test set. The log probability of the baseline line for each input is $log(P(y | x)) = log(0.5) = -0.6931$. The good results should be quite confident so probability should be close to 1 and $log(P_{good}) \approx log(1) = 0$. As we can see our mean log probability in both training and test sets are closer to 0 than those of simple baseline which implies that our performance is better than performance of baseline.
+						Not a typo, my performance was better on the test set. The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4592 linear search. The log probability of the baseline line for each input is $log(P(y | x)) = log(0.5) = -0.6931$. The good results should be quite confident so probability should be close to 1 and $log(P_{good}) \approx log(1) = 0$. As we can see our mean log probability in both training and test sets are closer to 0 than those of simple baseline which implies that our performance is better than performance of baseline.
 						
 					\item
-						For limited number of training examples, my result are:
+						\textbf{Limited training data}\\
+						For limited number of training examples, my results are:
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
 								\hline
-								\, &  Training set & Test set \\ \hline
+								\, &the first 100 instances from training set & Test set \\ \hline
 								Accuracy & $0.990 \pm 0.010 $ & $0.742 \pm 0.011$ \\ \hline
 								Mean (average) log probability & $-0.0139 \pm 0.0098$ & $-10.25 \pm 0.65 $\\
 								\hline
 							\end{tabular}
 						\end{center}
-						From the table it can be seen that when the training data is very limited (N = 100) then linear regression fits the training data too well, which results in learning the noise in the data. That is why it has extremely good accuracy and mean log probability close to zero on the training set. On other hand, the result on the test set is much worse in comparison to the previous task.  The mean log probability is far below the log probability of simple baseline ($log(P(y | x)) = log(0.5) = -0.6931$) which implies that in some cases our predictor gives extremely low chances (close to zero) to the right label from the test set.
+						Dimensionality of our feature vector is 100 (101 with bias), so any binary classification task when we have no more then 100 instances should be perfectly linearly separable. The minimisation function reached the maximum number of linear searches (8000). This is expected from logistic regression without prior in case of linearly separable training data because the minimisation function can just draw weights to extreme values until it reaches hardware constraints. \\As a consequence, from the table it can be see that linear regression fits the training data too well.  That is why it has extremely good accuracy and mean log probability close to zero on the training set (it is very confident in its predictions). On other hand, the result on the test set is much worse in comparison to the previous task.  The mean log probability is far below the log probability of simple baseline ($log(P(y | x)) = log(0.5) = -0.6931$) which implies that in some cases our predictor gives extremely low chances (close to zero) to the right labels from the test set.
 				\end{enumerate}
 			\subsection{Label noise model}
 				\begin{enumerate}[label=(\alph*)]

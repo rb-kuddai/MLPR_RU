@@ -6,6 +6,7 @@ function [] = tsk1_6_4(x_all_train, t_train, x_all_test, t_test)
     
     [w, predictor] = cs_linear_regression(x_train, t_train);
     
-    rmse_test = cs_rmse(t_test, predictor(x_test))
+    [rmse_test,  std_err_test]  = cs_rmse(t_test, predictor(x_test));
+    fprintf('rmse on test set %5.4f +/- %5.4f\n', rmse_test, std_err_test);
 end
 
