@@ -11,7 +11,11 @@ function [] = tsk1_2_c(x_all_train, t_train, x_all_test, t_test)
     [w, predictor] = cs_linear_regression(x_train, t_train);
     display(w, 'weights for neighbours pixels features');
     
-    show_rmse(t_train, predictor(x_train), t_test, predictor(x_test));
+    [rmse_train, std_err_train] = cs_rmse(t_train, predictor(x_train));
+    [rmse_test,  std_err_test]  = cs_rmse(t_test,  predictor(x_test));
+    
+    fprintf('rmse on training set %5.4f +/- %5.4f', rmse_train, std_err_train);
+    fprintf('rmse on test set %5.4f +/- %5.4f');
 
     %show surface
     figure,

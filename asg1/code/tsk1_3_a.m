@@ -22,19 +22,19 @@ function [] = tsk1_3_a(x_all, t, num_rbfs)
         regf = @rbf_reg;
     end
     
-    errors = zeros(1, length(num_rbfs));
+    rmse_records = zeros(1, length(num_rbfs));
     
     for i = 1:length(num_rbfs)
         num_rbf = num_rbfs(i);
         regf = create_rbf_regf(num_rbf);
         %default CV 10 folds 
         cvMse = crossval('mse', x, t,'predfun',regf);
-        errors(i) = sqrt(cvMse);
+        rmse_records(i) = sqrt(cvMse);
     end
     
-    plot(num_rbfs, errors)
+    plot(num_rbfs, rmse_records)
     hold on;
-    plot(num_rbfs, errors, 'r*');
+    plot(num_rbfs, rmse_records, 'r*');
     xlabel('number of rbf used');
     ylabel('Root Mean Square Error');
     set(gca,'FontSize', 18);

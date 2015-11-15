@@ -14,10 +14,6 @@ function [] = tsk1_3_b(x_all_train, t_train, x_all_test, t_test)
 
     net = rbf(dim, num_rbf, 1, 'gaussian');
     net = rbftrain(net, opt, x_train, t_train);
-
-    rmse_train = cs_rmse(t_train, rbffwd(net, x_train));
-    rmse_test  = cs_rmse(t_test,  rbffwd(net, x_test));
-
-    display(rmse_train, 'rmse on the training set');
-    display(rmse_test,  'rmse on the test set');
+    
+    show_rmse(t_train, rbffwd(net, x_train), t_test, rbffwd(net, x_test));
 end

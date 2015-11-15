@@ -148,7 +148,7 @@
 						\begin{tabular}{| c | c | c |}
 							\hline
 							\, & Training set & Test set \\ \hline
-							RMSE  & 0.0506 & 0.0503 \\ 
+							RMSE  & $0.0506 \pm 0.0010$ & $0.0503 \pm 0.0017$ \\ 
 							\hline
 						\end{tabular}
 					\end{center}
@@ -160,7 +160,6 @@
 				 	\end{figure}
 					This is not a typo, surprisingly my performance is a bit better on the test set. That is why we can conclude that linear regression is not over-fitting the data in this problem. It can be seen from figure \ref{fig:p1-2-c} that indeed there is strong positive correlation between adjacent pixels and target value pixel. 
 			\end{enumerate}
-			\newpage
 		\subsection{RBF regression with adjacent pixels}
 			\begin{enumerate}[label=(\alph*)]
 				\item
@@ -193,11 +192,11 @@
 						\begin{tabular}{| c | c | c |}
 							\hline
 							\, & Training set & Test set \\ \hline
-							RMSE  & 0.0506 & 0.0503 \\ 
+							RMSE  & $0.0506 \pm 0.0010$ & $0.0503 \pm 0.0017$ \\ 
 							\hline
 						\end{tabular}
 					\end{center}
-					As it can be seen that radial basis functions don't give any sufficient improvement in comparison to linear regression when both of them are using only adjacent pixels as features.
+					As it can be seen that radial basis functions don't give any improvement in comparison to linear regression when both of them are using only adjacent pixels as features.
 				 	Code snippet for this task:
 				 	\lstinputlisting{code/tsk1_3_a.m}
 			\end{enumerate}
@@ -208,11 +207,11 @@
 				\begin{tabular}{| c | c | c |}
 					\hline
 					\, & Training set & Test set \\ \hline
-					RMSE  &  0.0371 & 0.0456 \\ 
+					RMSE  &  $0.0371 \pm 0.0007$ & $0.0456 \pm 0.0018$ \\ 
 					\hline
 				\end{tabular}
 			\end{center}
-			There is an improvement comparing with both previous methods but on the test set it is quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of target pixel better, indeed, the most significant features are pixels adjacent to the target one.
+			There is an improvement comparing with both previous methods but on the test set it is quite small. Overall, it is possible to conclude that whereas knowledge of all the pixels helps to predict the value of target pixel better, it seems that the most significant features are pixels adjacent to the target one.
 			Code snippet for this task:
 			\lstinputlisting{code/tsk1_4.m}
 		\subsection{Neural Network with all pixels}
@@ -223,13 +222,12 @@
 						\begin{tabular}{| c | c | c |}
 							\hline
 							\, & Training set & Test set \\ \hline
-							RMSE  &  0.0333 & 0.0473 \\ 
+							RMSE  & $0.0333 \pm 0.0006$ & $0.0473 \pm 0.0017$ \\ 
 							\hline
 						\end{tabular}
 					\end{center}
-					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger.\\
+					In comparison to linear regression with all pixels Neural Network slightly over-fits the data because  its error is lower on training set but the error on test set is larger. In my opinion, this happens because NN with all pixels is very sophisticated model for our task.\\
 					Code snippet for this task:
-					\newpage
 					\lstinputlisting{code/tsk1_5_a.m}
 					
 				\item
@@ -264,7 +262,7 @@
 		 		\caption{plot of linear regression RMSE depending on the maximum distances from the target pixels within which pixels were  used as features.}
 		 		\label{fig:p1-6_closest_pixels}	
 		 	\end{figure}
-		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
+		 	In previous tasks linear regression with all pixels showed the best performance. That is why I thought that it would be reasonable to try something else with linear regression. It seemed to me that the adjacent pixels have the biggest impact on the intensity of the target pixel. But how many nearest pixels do we need? I wasn't sure so I evaluated linear regression performance depending on the number of pixels from the end of feature vector via cross-validation on the training set. The result can be seen on the figure \ref{fig:p1-6_num_pixels}. \textbf{Note}: the plot step is not uniform, after 182 I used much bigger step (100) because otherwise cross-validation would take too much time.\\ Figure suggests that the best value is something like 120. Using that number of feature on the test set (xte\_nf(:, 912:1032)) I received the following RMSE:
 			\begin{center}
 				\begin{tabular}{| c | c | }
 					\hline

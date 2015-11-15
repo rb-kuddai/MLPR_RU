@@ -12,22 +12,16 @@ function [] = tsk1_5_b(x_train, t_train, x_test, t_test)
     function [rmse_train, rmse_test] = launch_NN(seed)
         rng(seed,'twister')
         net = mlp(size(x_train,2), nhid, 1, 'linear');
-        [net, tmp] = netopt(net, options, x_train(1:5000,:), t_train(1:5000,:), 'scg');
+        [net, tmp] = netopt(net, options, x_train(1:50,:), t_train(1:50,:), 'scg');
         
-        rmse_train = cs_rmse(t_train, mlpfwd(net, x_train));    
-        rmse_test  = cs_rmse(t_test,  mlpfwd(net, x_test));
+        fprintf('seed %4.0f:\n', seed);
+        show_rmse(t_train, mlpfwd(net, x_train), t_test, mlpfwd(net, x_test));
     end
     
     seeds  = 2015:1:2019;
-    table = zeros(length(seeds), 3);
     
     for i = 1:length(seeds)
-        seed = seeds(i);
-        [rmse_train, rmse_test] = launch_NN(seed);
-        table(i, :) = [seed, rmse_train, rmse_test];
+        seed = seeds(i)
+        launch_NN(seed);
     end
-    
-    %LaTeX table format
-    formatSpec = '%4.0f & %5.4f & %5.4f \\\\ \n';
-    fprintf(formatSpec, table');
 end
