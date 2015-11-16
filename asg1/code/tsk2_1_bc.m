@@ -9,30 +9,19 @@ function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     else
         train_limit = varargin{1}
     end
-   
-    lr = @(ww, xx, yy) 1./(1 + exp(-yy.*(xx*ww))); %logistic regression function
-    
-    function [] = report(ww, xx, yy, type_str)
-        sigmas = lr(ww, xx, yy);
-        accuracy = sigmas > 0.5;
-        log_sigmas = log(sigmas); 
-        
-        fprintf('%s accuracy = %s \n',type_str ,errorbar_str(accuracy));
-        fprintf('%s log probability = %s \n',type_str, errorbar_str(log_sigmas));
-    end
 
-    function [nLp, dnLp_dw] = neg_lr_loglike(ww, xx, yy)
+    function [Lp, dLp_dw] = target_fun(ww, xx, yy)
         [Lp, dLp_dw] = lr_loglike(ww, xx, yy);
-        nLp = -1 * Lp;
-        dnLp_dw = -1 * dLp_dw;
+        Lp = -1 * Lp;
+        dLp_dw = -1 * dLp_dw;
     end
     
-    function ww = train_lr(xx, yy)
+    function ww = train(xx, yy)
         initial_ww = zeros(size(xx, 2), 1);
-        ww = minimize(initial_ww, @neg_lr_loglike, MAX_LIN_SEARCHES, xx, yy);
+        ww = minimize(initial_ww, @target_fun, MAX_LIN_SEARCHES, xx, yy);
     end
 
-    weights = train_lr(x_train(1:train_limit, :), y_train(1:train_limit, :));
-    report(weights, x_train(1:train_limit, :), y_train(1:train_limit, :), 'training set');
-    report(weights, x_test,  y_test,  'test set');
+    weights = train(x_train(1:train_limit, :), y_train(1:train_limit, :))
+    report_lr(weights, x_train(1:train_limit, :), y_train(1:train_limit, :), 'training set');
+    report_lr(weights, x_test,  y_test,  'test set');
 end

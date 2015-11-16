@@ -55,7 +55,7 @@
 				 		\caption{histogram of standard deviations in the xtr dataset after normalisation}
 				 		\label{fig:p1-1-a_std_hist}
 				 	\end{figure}
-				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = 0.5 / 32 \approx 0.0156$. If we use 32 bins on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
+				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = \approx 0.0156$. If we use 32 bins, for example, on a range of possible values of standard deviation (between 0 and 0.5) then the width of one bin will be 0.0156 and standard deviations with values  0.0151 or 0.0021 will go to the same bin. But we usually would associate standard deviation 0.0151 with the discrete (original) pixel value of 1 and 0.0021 with 0 because $round(0.0151/0.0156 - 1)=round(0.968)=1$ and $round(0.0021/0.0156)=round(0.135)=0$. Therefore, we must choose minimum 64 bins in order to distinguish such cases because we will have bins width $\frac{0.5}{64} \approx \frac{0.0156}{2} = 0.0078$ and each bin will correspond to the specific discrete (original) pixel value.\\
 				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation between 0 and 0.05. It can be confirmed from subtask c. 52739 patches which is more than 75\% of our initial dataset have standard deviation within 0 and 0.0635 range, and 0.0635 is quite small standard deviation. Therefore, most of the patches are flat ones. \\
 				 	Code snippet to plot histogram:
 				 	\lstinputlisting{code/tsk1_1_a.m}
@@ -84,7 +84,7 @@
 					\begin{gather*}
 						m = \frac{1032}{2}(1 - \sqrt{1 - 4 * 0.0635^2}) \approx 4.178
 					\end{gather*}
-					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original pixel intensity of 63) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. $round(0.0038/0.0156)=round(0.244)=0$ so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
+					rounding m to the closest integer we receive $m = 4$. \\Thus, in most extreme case of flat patch we can have 4 ones (correspond to original pixel intensity of 63) and 1028 zeros, so it is natural that we want to predict zero as discrete value of our target pixel.  The mean gives us $\mu = \frac{1028 * 0 + 1 * 4} {1032} \approx 0.0038$. Dividing range between 0 and 1 by 64 we get 0.0156 as our threshold to distinguish discrete pixel values. 0.0038 lies between 0 and 0.0156 so our mean value will correspond to 0 as the discrete value of our target pixel and that is what we wanted.
 				\newpage
 				\item
 				 	\begin{figure}[t]
@@ -243,7 +243,7 @@
 					\begin{center}
 						\begin{tabular}{| c | c | c |}
 							\hline
-							random seed & RMSE on full training set & RMSE on test set\\ \hline
+							Random seed & RMSE on full training set & RMSE on test set\\ \hline
 							2015 & $0.0500 \pm 0.0009$ & $0.0515 \pm 0.0014$ \\ 
 							2016 & $0.0477 \pm 0.0009$ & $0.0504 \pm 0.0014$ \\ 
 							2017 & $0.0485 \pm 0.0009$ & $0.0515 \pm 0.0014$ \\ 
@@ -314,8 +314,11 @@
 						\lstinputlisting{code/tsk2_1_a.m}
 					\item
 						\textbf{ Maximizing the likelihood} \\
+						The code snippet to report logistic regression performance with error bars:
+						\lstinputlisting{code/report_lr.m}
 						The code snippet for this and next task:
 						\lstinputlisting{code/tsk2_1_bc.m}
+						I set initial weights to zeros as my starting point in minimisation procedure, because in that case at the starting point linear regression is unbiased and will give equal probabilities to both labels for any data point. In other words,  it will start as a baseline predictor $P(y | \vect{x}) = 0.5$.\\
 						I have received the following results with standard errors:
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
@@ -324,27 +327,38 @@
 								\hline
 								Accuracy                  & $0.8335 \pm 0.0046$ & $0.9071 \pm 0.0072$ \\ 
 								\hline
-								Mean log probability &$-0.4398 \pm 0.0081$ & $-0.300  \pm 0.012 $\\
+								Mean log probability &$-0.4398 \pm 0.0081$ & $-0.300  \pm 0.012 $ \\
+								\hline
+								Variance of log probability & 0.4292 & 0.2234 \\
+								\hline
+								Median of log probability  & -0.2339 & -0.1998 \\
 								\hline
 							\end{tabular}
 						\end{center}
-						Not a typo, my performance was better on the test set. The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4592 linear search. The log probability of the baseline line for each input is $log(P(y | x)) = log(0.5) = -0.6931$. The good results should be quite confident so probability should be close to 1 and $log(P_{good}) \approx log(1) = 0$. As we can see our mean log probability in both training and test sets are closer to 0 than those of simple baseline which implies that our performance is better than performance of baseline.
+						Not a typo, my accuracy was better on the test set. Probably this indicates that training set is noisy (has some mislabelled records) but logistic regression is robust enough to capture general pattern instead of fitting the noise. And if we suggest that the test set was created more carefully then it will explain better accuracy on the test set.
+						\\
+						The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4921 linear search.  The log probability of the baseline line for each input is $log(P(y | \vect{x})) = log(0.5) = -0.6931$. The closer $mean(log(P(y|\vect{x})))$ to zero the more confident predictor in the right answers. Although we must remember about the fact that we can have good predictor with good accuracy, but if it gives chances which is close to zero to the right answer even to the one data point then due to the nature of log function ($log(0) = -\infty$) our log mean quantity will be skewed heavily and much smaller than zero. So theoretically it is possible to have predictor with 99.99\% accuracy but with mean log probability far below zero.
+						\\
+						As we can see our mean log probability in  test set is closer to 0 than those of simple baseline which together with our accuracy  implies that our performance is better than performance of baseline.
 						
 					\item
 						\textbf{Limited training data}\\
+						As in the previous subtask I used zeros as my initial weights.\\
 						For limited number of training examples, my results are:
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
 								\hline
-								\, &the first 100 instances from training set & Test set \\ 
+								\, & The first 100 instances from training set & Test set \\ 
 								\hline
 								Accuracy & $0.990 \pm 0.010 $ & $0.742 \pm 0.011$ \\ 
 								\hline
-								Mean (average) log probability & $-0.0139 \pm 0.0098$ & $-10.25 \pm 0.65 $\\
+								Mean (average) log probability & $-0.0139 \pm 0.0098$ & $-10.25 \pm 0.65 $ \\
 								\hline
 							\end{tabular}
 						\end{center}
-						Dimensionality of our feature vector is 100 (101 with bias), so any binary classification task when we have no more then 100 instances should be perfectly linearly separable. The minimisation function reached the maximum number of linear searches (8000). This is expected from logistic regression without prior in case of linearly separable training data because the minimisation function can just draw weights to extreme values until it reaches hardware constraints. \\As a consequence, from the table it can be see that linear regression fits the training data too well.  That is why it has extremely good accuracy and mean log probability close to zero on the training set (it is very confident in its predictions). On other hand, the result on the test set is much worse in comparison to the previous task.  The mean log probability is far below the log probability of simple baseline ($log(P(y | x)) = log(0.5) = -0.6931$) which implies that in some cases our predictor gives extremely low chances (close to zero) to the right labels from the test set.
+						Dimensionality of our feature vector is 100 (101 with bias), so any binary classification task when we have no more then 100 instances should be perfectly linearly separable. The minimisation function reached the maximum number of linear searches (8000). This is expected from logistic regression without any prior on its weights in case of linearly separable training data because the minimisation function can just draw weights to extreme values until it reaches hardware constraints (see  Kevin P. Murphy. Machine Learning  A Probabilistic Perspective. paragraph 8.4.3 - Gaussian approximation for logistic regression).
+						\\
+						As a consequence, from the table it can be see that linear regression fitted the training data too well and it possibly fitted the noise as well.  That is why it has extremely good accuracy and mean log probability close to zero on the training set (it is very confident in its predictions). On other hand, the result on the test set is much worse in comparison to the previous task.  The mean log probability is far below the log probability of simple baseline ($log(P(y | x)) = log(0.5) = -0.6931$) which implies that in some cases our predictor gives extremely low chances (close to zero) to the right labels from the test set.
 				\end{enumerate}
 			\subsection{Label noise model}
 				\begin{enumerate}[label=(\alph*)]
@@ -364,16 +378,28 @@
 						\end{align*}
 						
 						The derivatives of new model likelihood are:
-						\begin{align*}
+						\begin{align}
 							v^{(n)} &= y^{(n)}\vect{x}^{(n)T}\vect{w}
 							\\
 							L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}log(P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)) = 
-							 \sum_{n=1}^{N}log((1-\epsilon)\sigma(v^{(n)}) + \frac{\epsilon}{2}) 
-							 \\
-							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}\frac{(1 - \epsilon)\sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)}\vect{x}^{(n)T}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}				
+							\sum_{n=1}^{N}log((1-\epsilon)\sigma(v^{(n)}) + \frac{\epsilon}{2}) 
 							\\
-							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} &= \sum_{n=1}^{N}\frac{-\sigma(v^{(n)}) + \frac{1}{2}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
-						\end{align*}
+							\nabla_{\vect{w}}\sigma(v^{(n)}) &= 
+							\frac{-1} {(1 + exp(-v^{(n)}))^2} exp(-v^{(n)}) (-1) y^{(n)} \vect{x}^{(n)T} 
+							= \sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)}\vect{x}^{(n)T}
+							\\
+							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= 
+							\sum_{n=1}^{N}
+								\frac
+									{ (1 - \epsilon) \sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)} \vect{x}^{(n)T} } 
+									{ P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon) }				
+							\\
+							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} &=
+							 \sum_{n=1}^{N} 
+								 \frac 
+									 {-\sigma(v^{(n)}) + \frac{1}{2}} 
+									 {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
+						\end{align}
 						I have chosen the following test case for checking gradients implementation:
 						\begin{align*}
 							\vect{x}^{(1)} = \left(\begin{matrix} 0\\ 0\\ 1 \end{matrix}\right)
@@ -405,11 +431,42 @@
 							    \hline
 							\end{tabular}
 						\end{center}
-						As we can see in each case the absolute error doesn't exceed 0.01. As sanity check I use the fact that test case is symmetric in terms of $w_{1}$ and $w_{2}$, so our derivatives and finite differences must be the same for them.\\
+						As we can see in each case the absolute error doesn't exceed 0.01. As sanity check I use the fact that test case is symmetric in terms of $w_{1}$ and $w_{2}$, so our derivatives and finite differences for $w_{1}$ and $w_{2}$ must be the same.\\
 						Code snippet for "label noise model" log likelihood (will also be used in the next task):
 						\lstinputlisting{code/nlm_loglike.m}
 						Code snippet for this task:
 						\lstinputlisting{code/tsk2_2_a.m}
+						
+					\item
+						\textbf{Fitting a constrained parameter}\\
+						Slightly modifying formula (5) from previous task so we can use code from previous example:
+						\begin{align*}
+						\frac{\partial L(\vect{w}, \epsilon)}{\partial a} &=
+						\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} 
+						\frac{\partial \epsilon}{\partial a} =
+						\sum_{n=1}^{N} 
+							\frac 
+								{-\sigma(v^{(n)}) + \frac{1}{2}} 
+								{P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
+							\frac{-1} {(1 + exp(-a))^2} exp(-a) (-1) 
+						\\
+						&=\sum_{n=1}^{N} 
+								\frac 
+									{-\sigma(v^{(n)}) + \frac{1}{2}} 
+									{P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
+							\sigma^2(a)	exp(-a)		=
+							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} 
+							\epsilon^2 exp(-a)					
+						\end{align*}
+						\begin{center}
+							\begin{tabular}{| c | c |}
+								\hline
+								\, & Test set 
+								\\
+								Accuracy & 
+							\end{tabular}
+						\end{center}
+
 				\end{enumerate}
 				
 				
