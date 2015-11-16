@@ -64,14 +64,21 @@
 					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the i'th pixel in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x_{all\ other\ pixels}})$ where o is small function in comparison to $const_{flat\ patch}$, and its mean and standard deviation over all pixels in the patch are 0 and $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
 					The performance of this simple predictor can be estimated by considering extreme case when after normalisation (all pixel values between 0 and 1) most pixels are zeroes and small portion of pixels are ones (correspond to original intensity of 63). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
-						m < N - m\\
-						\mu = \frac{(N - m) * 0 + m * 1}{N} = \frac{m}{N}\\
-						\sigma^2 =\frac{1}{N}[(N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2]\\
-						= \frac{(N - m)m^2}{N^3} + \frac{m(N - m)^2}{N ^ 3}\\
-						N^3\sigma^2 = m^2N - m^3 + mN^2 - 2m^2N + m^3 \\
-						= mN^2-m^2N\\
-						m^2 - mN + N^2\sigma^2 = 0\\
-						m = \frac{N}{2}(1 - \sqrt{1 - 4 \sigma ^ 2})\quad\text{(minus because our case is $m < N - m$ )}\\
+						m < N - m
+						\\
+						\mu = \frac{(N - m) * 0 + m * 1}{N} = \frac{m}{N}
+						\\
+						\sigma^2 =\frac{1}{N}[(N - m) (0 - \frac{m}{N})^2 + m(1 - \frac{m}{N})^2]
+						\\
+						= \frac{(N - m)m^2}{N^3} + \frac{m(N - m)^2}{N ^ 3}
+						\\
+						N^3\sigma^2 = m^2N - m^3 + mN^2 - 2m^2N + m^3 
+						\\
+						= mN^2-m^2N
+						\\
+						m^2 - mN + N^2\sigma^2 = 0
+						\\
+						m = \frac{N}{2}(1 - \sqrt{1 - 4 \sigma ^ 2})\quad\text{(minus because our case is $m < N - m$ )}
 					\end{gather*}
 					putting $\sigma_{flat \, pach \, max} = \frac{4}{63} \approx 0.0635$ instead of $\sigma$ and using $N = 1032$ we get
 					\begin{gather*}
@@ -313,9 +320,11 @@
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
 								\hline
-								\, &  Training set & Test set \\ \hline
-								Accuracy & $0.8335 \pm 0.0046$ & $0.9071 \pm 0.0072$ \\ \hline
-								Mean log probability & $-0.4398 \pm 0.0081 $ & $-0.300 \pm 0.012 $\\
+								\, &  Training set & Test set \\ 
+								\hline
+								Accuracy                  & $0.8335 \pm 0.0046$ & $0.9071 \pm 0.0072$ \\ 
+								\hline
+								Mean log probability &$-0.4398 \pm 0.0081$ & $-0.300  \pm 0.012 $\\
 								\hline
 							\end{tabular}
 						\end{center}
@@ -327,8 +336,10 @@
 						\begin{center}
 							\begin{tabular}{| c | c | c |}
 								\hline
-								\, &the first 100 instances from training set & Test set \\ \hline
-								Accuracy & $0.990 \pm 0.010 $ & $0.742 \pm 0.011$ \\ \hline
+								\, &the first 100 instances from training set & Test set \\ 
+								\hline
+								Accuracy & $0.990 \pm 0.010 $ & $0.742 \pm 0.011$ \\ 
+								\hline
 								Mean (average) log probability & $-0.0139 \pm 0.0098$ & $-10.25 \pm 0.65 $\\
 								\hline
 							\end{tabular}
@@ -338,23 +349,67 @@
 			\subsection{Label noise model}
 				\begin{enumerate}[label=(\alph*)]
 					\item 
+						\textbf{Modifying the likelihood}\\
 						The events $s_{n}=1$ and $s_{n}=0$ are mutually exclusive and together they are collectively exhaustive events and also  $s_{n}$ is independent from $\vect{x},\ \vect{w},\ y$ that is why:
 						\begin{align*}
-							P(s_{n}=1) &= 1 - \epsilon \quad P(s_{n}=0)=\epsilon\\
-							P_{uniform}(y) &= \frac{1}{size(\{-1, +1\})}=\frac{1}{2}\\
-							P(y|\vect{x},\vect{w}) &= \sigma(y\vect{w}^{T}\vect{x})\\
-							P(y|\vect{x}, \vect{w}, \epsilon) &= P(s_{n}=1)P(y|\vect{x},\vect{w}) + P(s_{n}=0)P_{uniform}(y)=\\
+							P(s_{n}=1) &= 1 - \epsilon \quad P(s_{n}=0)=\epsilon
+							\\
+							P_{uniform}(y) &= \frac{1}{size(\{-1, +1\})}=\frac{1}{2}
+							\\
+							P(y|\vect{x},\vect{w}) &= \sigma(y\vect{w}^{T}\vect{x})
+							\\
+							P(y|\vect{x}, \vect{w}, \epsilon) &= P(s_{n}=1)P(y|\vect{x},\vect{w}) + P(s_{n}=0)P_{uniform}(y)=
+							\\
 							&=(1-\epsilon)\sigma(y\vect{w}^{T}\vect{x}) + \frac{\epsilon}{2}
-							%P(y|\vect{x},\ \vect{w},) 
-							%= P(s_{n}=1)P(y|\vect{x},\ \vect{w}) + P(s_{n}=0)P_{uniform}(y)
 						\end{align*}
-					
-					\item
+						
+						The derivatives of new model likelihood are:
 						\begin{align*}
+							v^{(n)} &= y^{(n)}\vect{x}^{(n)T}\vect{w}
+							\\
 							L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}log(P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)) = 
-							 \sum_{n=1}^{N}log((1-\epsilon)\sigma(y^{(n)}\vect{x}^{(n)T}\vect{w}) + \frac{\epsilon}{2})  \\
-							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}\frac{\sigma^2(y^{(n)}\vect{x}^{(n)T}\vect{w}) exp(-y^{(n)}\vect{x}^{(n)T}\vect{w}) y^{(n)}\vect{x}^{(n)T}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}
+							 \sum_{n=1}^{N}log((1-\epsilon)\sigma(v^{(n)}) + \frac{\epsilon}{2}) 
+							 \\
+							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}\frac{(1 - \epsilon)\sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)}\vect{x}^{(n)T}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}				
+							\\
+							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} &= \sum_{n=1}^{N}\frac{-\sigma(v^{(n)}) + \frac{1}{2}} {P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
 						\end{align*}
+						I have chosen the following test case for checking gradients implementation:
+						\begin{align*}
+							\vect{x}^{(1)} = \left(\begin{matrix} 0\\ 0\\ 1 \end{matrix}\right)
+							&\quad
+							y^{(1)} = -1
+							\\
+							\vect{x}^{(2)} = \left(\begin{matrix} 2\\ 2\\ 1 \end{matrix}\right)
+							&\quad
+							y^{(2)}=1 
+							\\
+							\vect{w} = \left(\begin{matrix} 1\\ 1\\ 1 \end{matrix}\right)
+							&\quad
+							\epsilon = 0.2
+						\end{align*}
+						I have used $h =0.1$ which implies that absolute value of error should not exceed 0.01.\\ 
+						The results of checking "label noise model" likelihood derivatives via checkgrad.m are:
+						\begin{center}
+							\begin{tabular}{| c | c | c | c |}
+								\hline
+								\, & derivative & finite difference & absolute error \\
+								\hline
+								$w_{1}$ 	& 0.0119 & 0.0120 & 0.0001 \\
+								\hline
+								$w_{2}$     & 0.0119 & 0.0120 & 0.0001 \\
+								\hline
+							    $w_{bias}$ &-0.4931 &-0.4928& 0.0003 \\
+							    \hline
+							    $\epsilon$ & 0.1818 & 0.1825 & 0.0008 \\
+							    \hline
+							\end{tabular}
+						\end{center}
+						As we can see in each case the absolute error doesn't exceed 0.01. As sanity check I use the fact that test case is symmetric in terms of $w_{1}$ and $w_{2}$, so our derivatives and finite differences must be the same for them.\\
+						Code snippet for "label noise model" log likelihood (will also be used in the next task):
+						\lstinputlisting{code/nlm_loglike.m}
+						Code snippet for this task:
+						\lstinputlisting{code/tsk2_2_a.m}
 				\end{enumerate}
 				
 				

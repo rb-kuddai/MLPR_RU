@@ -1,7 +1,7 @@
 %launch via - tsk1_3_b(xtr_nf, ytr_nf, xte_nf, yte_nf)
 function [] = tsk1_3_b(x_all_train, t_train, x_all_test, t_test)
     %t - means target values
-    get_adjacent_pixels = @(x) [x(:, 1032), x(:, 1032 - 34)];
+    get_adjacent_pixels = @(x) [x(:, end), x(:, end - 34)];
 
     x_train = get_adjacent_pixels(x_all_train);
     x_test  = get_adjacent_pixels(x_all_test);

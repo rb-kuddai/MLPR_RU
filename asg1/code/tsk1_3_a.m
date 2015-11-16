@@ -4,7 +4,7 @@
 %tsk1_3_a(xtr_nf, ytr_nf, 1:20)
 function [] = tsk1_3_a(x_all, t, num_rbfs)
     %t - means target values
-    get_adjacent_pixels = @(x) [x(:, 1032), x(:, 1032 - 34)];
+    get_adjacent_pixels = @(x) [x(:, end), x(:, end - 34)];
    
     x = get_adjacent_pixels(x_all);
     

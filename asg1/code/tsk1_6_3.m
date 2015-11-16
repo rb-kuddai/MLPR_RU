@@ -8,7 +8,7 @@ function [] = tsk1_6_3(x_all_train, t)
     end
     
     max_distances = 2:17;
-    errors = zeros(length(max_distances), 1);
+    rmse_records = zeros(length(max_distances), 1);
     
     for i = 1:length(max_distances)
         max_dist = max_distances(i)
@@ -17,12 +17,12 @@ function [] = tsk1_6_3(x_all_train, t)
         size(x)
         %default 10 fold
         cvMse = crossval('mse', x, t,'predfun', @regf);
-        errors(i) = cvMse ^ 0.5;
+        rmse_records(i) = cvMse ^ 0.5;
     end
     
-    plot(max_distances, errors);
+    plot(max_distances, rmse_records);
     hold on;
-    plot(max_distances, errors, 'r*');
+    plot(max_distances, rmse_records, 'r*');
     xlabel('maximum distance from target pixel');
     ylabel('Root Mean Square Error');
 end
