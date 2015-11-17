@@ -10,7 +10,7 @@ function [rmse_est, std_err] = cs_rmse(t, y)
         %to produce some bounds on rmse:
         %mse = mse_est +/- mse_std_err
         %rmse = f(mse) = f(mse_est +/- mse_std_err) = sqrt(mse_est +/- mse_std_err)
-        %f(u + h) ~= f(u) + f'(x)h = sqrt(u) + 0.5 * h/(sqrt(u)) %Taylor expansion
+        %f(u +/- h) ~= f(u) +/- f'(u)h = sqrt(u) +/- 0.5 * h/(sqrt(u)) %Taylor expansion
         S = numel(t);
         var_est = var(sqr_diff);
         mse_std_err = sqrt(var_est/S);
