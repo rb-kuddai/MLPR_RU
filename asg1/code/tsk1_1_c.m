@@ -7,6 +7,7 @@ function [] = tsk1_1_c(xtr)
     %the threshold 4/63 is taken from the task 
     flat_threshold = 4/63;
     flat_patches_ids     = patches_std <= flat_threshold;
+    
     non_flat_patches_ids = patches_std >  flat_threshold;
 
     %split on flat and non-flat patches

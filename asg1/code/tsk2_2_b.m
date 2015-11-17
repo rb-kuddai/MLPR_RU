@@ -18,7 +18,7 @@ function [] = tsk2_2_b(x_train, y_train, x_test, y_test)
     end
     
     function qq = train(xx, yy)
-        initial_qq = zeros(size(xx, 2) + 1, 1);% plus one to count parameter a
+        initial_qq = zeros(size(xx, 2) + 1, 1);% plus one to account parameter a
         qq = minimize(initial_qq, @target_fun, MAX_LIN_SEARCHES, xx, yy);
     end
 

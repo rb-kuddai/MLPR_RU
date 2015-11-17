@@ -4,7 +4,7 @@ function [] = report_lr(ww, xx, yy, type_str)
     accuracy = sigmas > 0.5;
     log_sigmas = log(sigmas); 
     
-    fprintf('%s meadian of log prob = %5.4f\n', type_str, median(log_sigmas));
+    fprintf('%s median of log prob = %5.4f\n', type_str, median(log_sigmas));
     fprintf('%s standard deviation of log prob = %5.4f\n', type_str, std(log_sigmas));
     fprintf('%s accuracy = %s \n',type_str ,errorbar_str(accuracy));
     fprintf('%s log probability = %s \n',type_str, errorbar_str(log_sigmas));

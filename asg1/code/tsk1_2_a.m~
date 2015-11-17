@@ -14,7 +14,6 @@ function [] = tsk1_2_a(xtr_nf, ytr_nf)
     set(gca,'FontSize', 20);
     
     figure;
-    histogram(ytr_nf,64);
+    histogram(patches_std,64);
     xlabel('target pixel intensity');
-    set(gca,'FontSize', 20);
 end
