@@ -14,7 +14,7 @@ function [] = tsk2_2_b(x_train, y_train, x_test, y_test)
         Lp = -Lp;
         %augmenting derivative
         dLp_dq = -dLp_dk(:);%copy original array
-        dLp_dq(end) = dLp_dq(end) * eps^2 * exp(-a);
+        dLp_dq(end) = dLp_dq(end) * eps * (1 - eps);
     end
     
     function qq = train(xx, yy)

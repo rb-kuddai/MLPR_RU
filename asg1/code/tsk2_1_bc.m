@@ -16,7 +16,7 @@ function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     end
     
     function ww = train(xx, yy)
-        initial_ww = ones(size(xx, 2), 1);
+        initial_ww = zeros(size(xx, 2), 1);
         ww = minimize(initial_ww, @target_fun, MAX_LIN_SEARCHES, xx, yy);
     end
 

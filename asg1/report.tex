@@ -49,20 +49,29 @@
 		\subsection{Data preprocessing and visualization}
 			 \begin{enumerate}[label=(\alph*)]
 			 	\item
-				 	\begin{figure}[htp]
+				 	\begin{figure}[t]
 				 		\centering
-				 		\includegraphics[width=12cm]{images/p1-1-a_std_hist}
-				 		\caption{histogram of standard deviations in the xtr dataset after normalisation}
-				 		\label{fig:p1-1-a_std_hist}
+				 		\caption{patch images}
+				 		\label{fig:patch_images}
+				 		\begin{subfigure}{0.5\textwidth}
+				 			\includegraphics[width=\linewidth]{images/p1-1-a_std_hist}
+				 			\caption{histogram of standard deviations in the xtr dataset after normalisation}
+				 			\label{fig:p1-1-a_std_hist}
+				 		\end{subfigure}%
+				 		\begin{subfigure}{0.5\textwidth}
+				 			\includegraphics[width=\linewidth]{images/p1-1-a_dist}
+				 			\caption{approximate distribution of standard deviations in the xtr dataset}
+				 			\label{fig:p1-1-a_dist}
+				 		\end{subfigure}%
 				 	\end{figure}
 				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation between 0 and 0.05. It can be confirmed from subtask c. 52739 patches which is more than 75\% of our initial dataset have standard deviation within 0 and 0.0635 range, and 0.0635 is quite small standard deviation. Therefore, most of the patches are flat ones. \\
-				 	The distribution can be described by that family of distribution $P(t) \propto t^{\alpha} exp(-\beta t)$, 
-				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = \approx 0.0156$ so that values between 0 and 0.0156 will be regarded as discrete intensity of zero and between 63 * 0.0156 and 1 will be discrete intensity of 63. Because most of the patches are flat one we can approximately describe each such patch as Gaussian. That is why we can say that approximately 95\% of pixels will be within two standard deviations from mean of the patch. Due to the fact that each bin corresponds to the standard deviation by the equation $bin-standard-deviation = bin-index * bin-width$ and, therefore, two standard deviations $2 * bin-standard-deviation = bin-index * 2 * bin-width$. So by choosing bin-width as half of our threshold 0.0156 we can associate each bin with discrete (original pixel value) value of 2 standard deviations. That is why it will be possible to say that for the patch in the first bin most of the pixels are different from the mean value only by 1 discrete value of intensity, for second bin it will be 2 discrete value of intensity, etc until we reach non-flat patches. And $bin-width = threshold * 0.5 = 0.5/64$ so we should choose 64 as number of our bins.
+				 	The distribution can be approximated by family of distribution $P(t) \propto t^{\alpha} exp(-\beta t)$. For example, if I put $\alpha = 0.78$ and $\beta = 50$ then I will have the figure \ref{fig:p1-1-a_dist}\\
+				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = \approx 0.0156$ so that values between 0 and 0.0156 will be regarded as discrete intensity of zero and between 63 * 0.0156 and 1 will be discrete intensity of 63. Because most of the patches are flat one we can approximately describe each such patch as Gaussian. That is why we can say that approximately 95\% of pixels will be within two standard deviations from mean of the patch. Due to the fact that each bin corresponds to the standard deviation by the equation $bin-standard-deviation = bin-index * bin-width$ and, therefore, two standard deviations $2 * bin-standard-deviation = bin-index * 2 * bin-width$. So by choosing bin-width as half of our threshold 0.0156 we can associate each bin with discrete (original pixel value) value of 2 standard deviations. That is why it will be possible to say that for the patch in the first bin most of the pixels are different from the mean value only by 1 discrete value of intensity, for second bin it will be 2 discrete value of intensity, etc until we reach non-flat patches. $bin-width = \frac{threshold} {2} = \frac{0.0156}{2} =0.5/64 = 0.0078$ and to have such width of the bins we should choose 64 as number of our bins.
 				 	Code snippet to plot histogram:
 				 	\lstinputlisting{code/tsk1_1_a.m}
 				 	
 				\item
-					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the i'th pixel in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x_{all\ other\ pixels}})$ where $o(\vect{x_{all\ other\ pixels}})$ is small function in comparison to $const_{flat\ patch}$, and $o(\vect{x_{all\ other\ pixels}})$  mean and standard deviation over all pixels in the patch are 0 and $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
+					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the i'th pixel in the flat patch should be something like this $f_{i}(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x}_{\textbackslash i})$ where $o(\vect{x}_{\textbackslash i})$ is small function in comparison to $const_{flat\ patch}$, and $o(\vect{x_{all\ other\ pixels}})$  mean and standard deviation over all pixels in the patch are 0 and $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
 					The performance of this simple predictor can be estimated by considering extreme case when after normalisation (all pixel values between 0 and 1) most pixels are zeroes and small portion of pixels are ones (correspond to original intensity of 63). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
 						m < N - m
@@ -346,13 +355,13 @@
 								\hline
 								Accuracy                  & $83.35 \pm 0.46 \%$ & $90.71 \pm 0.72 \%$ \\ 
 								\hline
-								Mean log probability &$-0.4398 \pm 0.0081$ & $-0.299  \pm 0.011  $ \\
+								Mean log probability &$-0.4398 \pm 0.0081$ & $-0.300 \pm 0.012 $ \\
 								\hline
 							\end{tabular}
 						\end{center}
 						Not a typo, my accuracy was better on the test set. Probably this indicates that training set is noisy (has some mislabelled records) but logistic regression is robust enough to capture general pattern instead of fitting the noise. And if we suggest that the test set was created more carefully then it will explain better accuracy on the test set.
 						\\
-						The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4184 linear search.  The log probability of the baseline line for each input is $log(P(y | \vect{x})) = log(0.5) = -0.6931$. The closer $mean(log(P(y|\vect{x})))$ to zero the more confident predictor in the right answers. Although we must remember the fact that we can have good predictor with good accuracy, but if it gives chances which is close to zero to the right answer even to the one data point then due to the nature of log function ($log(01)= -\infty$) our log mean quantity will be skewed heavily and much smaller than zero. So theoretically it is possible to have predictor with 99.99\% accuracy but with mean log probability far below zero.
+						The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4921linear search.  The log probability of the baseline line for each input is $log(P(y | \vect{x})) = log(0.5) = -0.6931$. The closer $mean(log(P(y|\vect{x})))$ to zero the more confident predictor in the right answers. Although we must remember the fact that we can have good predictor with good accuracy, but if it gives chances which is close to zero to the right answer even to the one data point then due to the nature of log function ($log(01)= -\infty$) our log mean quantity will be skewed heavily and much smaller than zero. So theoretically it is possible to have predictor with 99.99\% accuracy but with mean log probability far below zero.
 						\\
 						As we can see our mean log probability in  test set is closer to 0 than those of simple baseline $P(y | \vect{x})=0.5$ which together with our accuracy  implies that our performance is better.
 						
@@ -420,12 +429,12 @@
 							\\
 							\nabla_{\vect{w}}\sigma(v^{(n)}) &= 
 							\frac{-1} {(1 + exp(-v^{(n)}))^2} exp(-v^{(n)}) (-1) y^{(n)} \vect{x}^{(n)T} 
-							= \sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)}\vect{x}^{(n)T}
+							= \sigma(v^{(n)}) (1 - \sigma(v^{(n)})) y^{(n)}\vect{x}^{(n)T}
 							\\
 							\nabla_{\vect{w}}L(\vect{w}, \epsilon) &= 
 							\sum_{n=1}^{N}
 								\frac
-									{ (1 - \epsilon) \sigma^2(v^{(n)}) exp(-v^{(n)}) y^{(n)} \vect{x}^{(n)T} } 
+									{ (1 - \epsilon) \sigma(v^{(n)}) (1 - \sigma(v^{(n)}))  y^{(n)} \vect{x}^{(n)T} } 
 									{ P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon) }				
 							\\
 							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} &=
@@ -448,7 +457,7 @@
 							&\quad
 							\epsilon = 0.2
 						\end{align*}
-						I have used $h =0.1$ which implies that absolute value of error should not exceed 0.01.\\ 
+						I have used step $h =0.1$ which implies that absolute value of error should not exceed $h^2=0.01$.\\ 
 						The results of checking "label noise model" likelihood derivatives via checkgrad.m are:
 						\begin{center}
 							\begin{tabular}{| c | c | c | c |}
@@ -488,9 +497,9 @@
 								\frac 
 									{-\sigma(v^{(n)}) + \frac{1}{2}} 
 									{P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)}		
-							\sigma^2(a)	exp(-a)		=
+							\sigma(a)(1 - \sigma(a))		=
 							\frac{\partial L(\vect{w}, \epsilon)}{\partial \epsilon} 
-							\epsilon^2 exp(-a)					
+							\epsilon (1 - \epsilon)				
 						\end{align*}
 						After training label noise model and applying final weights from it on the logistic model, the  performance is:
 						\begin{center}
@@ -498,13 +507,19 @@
 								\hline
 								\, & Training set & Test set \\
 								\hline
-								Accuracy & $85.17 \pm 0.44\%$ & $91.32 \pm 0.70\%$ \\
+								Accuracy & $85.11 \pm 0.44\%$ & $91.20 \pm 0.70\%$ \\
 								\hline
-								Mean Log Probability & $-9.60 \pm 0.47$ & $-1.09 \pm 0.18 $\\
+								Mean Log Probability & $-9.31 \pm 0.46$ & $-1.10 \pm 0.18$\\
 								\hline
 							\end{tabular}
 						\end{center}
-						 From here we can see that accuracy has improved on both training and test sets in comparison to the results from task 2.1.b . Although by looking at the mean log probability for training and test set we can conclude that predictor has become less confident in some cases. But by taking into consideration the fact that our training set contains mislabelled data the predictor should be uncertain about such data points.\\ The better accuracy and thus, classification performance points out that by using model which reflects the condition of  our data set better (mislabelled data) we can infer more useful information from the data set and make our predictor more robust to incorrect data points.
+						And the value of the fitted noise:
+						\begin{align*}
+							\epsilon =  0.2144 \quad a = -1.2989
+						\end{align*}
+						 From here we can see that accuracy has improved on both training and test sets in comparison to the results from task 2.1.b . Although by looking at the mean log probability for training and test set we can conclude that predictor has become less confident in some cases. But by taking into consideration the fact that our training set contains mislabelled data the predictor should be uncertain about such data points.\\ The better accuracy and thus, classification performance points out that by using model which reflects the condition of  our data set better (mislabelled data) we can infer more useful information from the data set and make our predictor more robust to incorrect data points.\\
+						 The code snippet for this task:
+						 \lstinputlisting{code/tsk2_2_b.m}
 				\end{enumerate}
 				
 				
