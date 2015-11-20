@@ -318,7 +318,7 @@
 					\hline
 				\end{tabular}
 			\end{center}
-			This is good result and this model is computationally efficient because it needs to take only 21 closest pixels in contrast to linear regression or Neural Network with all the pixels. \\ 
+			This is a good result but the given bounds suggest that the performance is not significantly better. However this model is computationally much more efficient because it needs to take only 21 closest pixels in contrast to 120 in the previous one, or linear regression, or Neural Network with all the pixels. \\ 
 			Code snippet to plot figure \ref{fig:p1-6_num_pixels}:
 			\lstinputlisting{code/tsk1_6_1.m}
 			Code snippet to get performance on the test set using 120 pixels from the end:
@@ -475,7 +475,7 @@
 							\end{tabular}
 						\end{center}
 						As we can see in each case the absolute error doesn't exceed 0.01. So our gradient must work fine. As a sanity check I use the fact that test case is symmetric in terms of $w_{1}$ and $w_{2}$, so our derivatives and finite differences for $w_{1}$ and $w_{2}$ must be the same. The absolute error of $\epsilon$ is the biggest one possibly because the step h=0.1 is just too big for it. \\
-						Code snippet for "label noise model" log likelihood (will also be used in the next task):
+						Code snippet for "label noise model" log likelihood (will also be used in the next tasks):
 						\lstinputlisting{code/nlm_loglike.m}
 						Code snippet for this task:
 						\lstinputlisting{code/tsk2_2_a.m}
@@ -522,5 +522,30 @@
 						 \lstinputlisting{code/tsk2_2_b.m}
 				\end{enumerate}
 				
+				\subsection{Hierarchical model and MCMCl}
+					\begin{enumerate}[label=(\alph*)]
+						\item 
+							Log is concave and monotonically increasing function (if base > 0) that is why the largest log-likelihood happens when likelihood attains the biggest possible value. Likelihood is multiplication of probabilities of each observation for given model and each probability is between 0 and 1, so likelihood maximum value is 1 which correspond to the case when our model is able to predict all training labels correctly and it is 100\% sure about that.  
+							\begin{align*}
+							max(\mathcal{L})=max(log(likelihood)) = log(max(likelihood))=log(1)=0
+							\end{align*}
+							From the equation 3 in the assignment the single observation in our model  when all weights are zero is:
+							\begin{align*}
+							P(y| \vect{x}, \vect{w}=0, \epsilon) = (1 - \epsilon) \sigma(0) + \frac{\epsilon}{2}=(1-\epsilon)0.5 + 0.5\epsilon = 0.5 - 0.5\epsilon + 0.5\epsilon = 0.5
+							\end{align*}
+							So it produces the same probability as original logistic regression when all of the weights are zero or baseline that predicts $P(y | x) =0.5$ for every case. Putting it in the log-likelihood:
+							\begin{align*}
+							\mathcal{L}(\vect{w}=0, \epsilon)=\sum_{n=1}^{N}P(y| \vect{x}, \vect{w}=0, \epsilon)=\sum_{n=1}^{N}log(0.5)=log(0.5)N = -0.6931N
+							\end{align*}
+							Which is constant given the data (so N is fixed).
+							Using this result, the log-posterior from the equation 6 in the assignment when all weights are zeros becomes:
+							\begin{align*}
+							logP(\epsilon, \vect{w} &=0, log( \lambda)=\infty | data) = -0.6931N - \lambda * 0 + \frac{D}{2}log(\lambda) + const =  \frac{D}{2}log(\lambda) + const2 \\
+							&= \infty + const2 = \infty \\
+							\end{align*}
+							But the posterior is a probability so its values lies between 0 and 1 so the maximum value of log-posterior is 0. So the situation when $\lambda$ has no bounds and it is not finite must be avoided.
+						\item 
+					\end{enumerate}
+							
 				
 \end{document}

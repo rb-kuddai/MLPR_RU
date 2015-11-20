@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  20 NOV 2015 00:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  20 NOV 2015 05:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -846,7 +846,7 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<images/p1-1-a_std_hist.png, id=44, 562.1pt x 421.575pt>
+<images/p1-1-a_std_hist.png, id=48, 562.1pt x 421.575pt>
 File: images/p1-1-a_std_hist.png Graphic file (type png)
 
 <use images/p1-1-a_std_hist.png>
@@ -857,7 +857,7 @@ Underfull \hbox (badness 1009) in paragraph at lines 58--58
 []\T1/cmr/m/n/9 (a) |his-togram of stan-dard de-vi-a-tions in the xtr
  []
 
-<images/p1-1-a_dist.png, id=45, 562.1pt x 421.575pt>
+<images/p1-1-a_dist.png, id=49, 562.1pt x 421.575pt>
 File: images/p1-1-a_dist.png Graphic file (type png)
 
 <use images/p1-1-a_dist.png>
@@ -877,28 +877,28 @@ File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) [2 <./
 images/p1-1-a_std_hist.png (PNG copy)> <./images/p1-1-a_dist.png (PNG copy)>]
-<images/p1-1-c_flat.png, id=90, 562.1pt x 421.575pt>
+<images/p1-1-c_flat.png, id=94, 562.1pt x 421.575pt>
 File: images/p1-1-c_flat.png Graphic file (type png)
 
 <use images/p1-1-c_flat.png>
 Package pdftex.def Info: images/p1-1-c_flat.png used on input line 105.
 (pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
 
-<images/p1-1-c_non_flat.png, id=91, 562.1pt x 421.575pt>
+<images/p1-1-c_non_flat.png, id=95, 562.1pt x 421.575pt>
 File: images/p1-1-c_non_flat.png Graphic file (type png)
 
 <use images/p1-1-c_non_flat.png>
 Package pdftex.def Info: images/p1-1-c_non_flat.png used on input line 110.
 (pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
  (./code/tsk1_1_c.m)
-<images/p1-2-a_left_target.png, id=93, 519.9425pt x 420.57124pt>
+<images/p1-2-a_left_target.png, id=97, 519.9425pt x 420.57124pt>
 File: images/p1-2-a_left_target.png Graphic file (type png)
 
 <use images/p1-2-a_left_target.png>
 Package pdftex.def Info: images/p1-2-a_left_target.png used on input line 124.
 (pdftex.def)             Requested size: 213.39568pt x 172.6086pt.
 
-<images/p1-2-a_above_target.png, id=94, 468.75125pt x 361.35pt>
+<images/p1-2-a_above_target.png, id=98, 468.75125pt x 361.35pt>
 File: images/p1-2-a_above_target.png Graphic file (type png)
 
 <use images/p1-2-a_above_target.png>
@@ -906,7 +906,7 @@ Package pdftex.def Info: images/p1-2-a_above_target.png used on input line 129.
 
 (pdftex.def)             Requested size: 213.39568pt x 164.49721pt.
 
-<images/p1-2-a_closest_pixels.png, id=95, 672.5125pt x 485.815pt>
+<images/p1-2-a_closest_pixels.png, id=99, 672.5125pt x 485.815pt>
 File: images/p1-2-a_closest_pixels.png Graphic file (type png)
 
 <use images/p1-2-a_closest_pixels.png>
@@ -914,7 +914,7 @@ Package pdftex.def Info: images/p1-2-a_closest_pixels.png used on input line 13
 4.
 (pdftex.def)             Requested size: 213.39568pt x 154.15189pt.
 
-<images/p1-2-a_target_hist.png, id=96, 541.02126pt x 434.62375pt>
+<images/p1-2-a_target_hist.png, id=100, 541.02126pt x 434.62375pt>
 File: images/p1-2-a_target_hist.png Graphic file (type png)
 
 <use images/p1-2-a_target_hist.png>
@@ -934,7 +934,7 @@ Overfull \hbox (2.22168pt too wide) in paragraph at lines 123--143
 y)>] (./code/tsk1_2_a.m) [4 <./images/p1-2-a_left_target.png (PNG copy)> <./ima
 ges/p1-2-a_above_target.png (PNG copy)> <./images/p1-2-a_closest_pixels.png (PN
 G copy)> <./images/p1-2-a_target_hist.png (PNG copy)>]
-<images/p1-2-c.png, id=180, 689.57625pt x 515.9275pt>
+<images/p1-2-c.png, id=184, 689.57625pt x 515.9275pt>
 File: images/p1-2-c.png Graphic file (type png)
  <use images/p1-2-c.png>
 Package pdftex.def Info: images/p1-2-c.png used on input line 186.
@@ -958,14 +958,14 @@ Overfull \hbox (20.61298pt too wide) in paragraph at lines 13--14
  []
 
 ) (./code/show_rmse.m) (./code/tsk1_2_c.m [6])
-<images/p1-3-a_5_30.png, id=267, 562.1pt x 421.575pt>
+<images/p1-3-a_5_30.png, id=271, 562.1pt x 421.575pt>
 File: images/p1-3-a_5_30.png Graphic file (type png)
 
 <use images/p1-3-a_5_30.png>
 Package pdftex.def Info: images/p1-3-a_5_30.png used on input line 206.
 (pdftex.def)             Requested size: 213.39568pt x 160.04578pt.
 
-<images/p1-3-a_5_30_another.png, id=268, 591.20876pt x 410.53375pt>
+<images/p1-3-a_5_30_another.png, id=272, 591.20876pt x 410.53375pt>
 File: images/p1-3-a_5_30_another.png Graphic file (type png)
 
 <use images/p1-3-a_5_30_another.png>
@@ -973,7 +973,7 @@ Package pdftex.def Info: images/p1-3-a_5_30_another.png used on input line 211.
 
 (pdftex.def)             Requested size: 213.39568pt x 148.18042pt.
 
-<images/p1-3-a_1_20.png, id=269, 562.1pt x 421.575pt>
+<images/p1-3-a_1_20.png, id=273, 562.1pt x 421.575pt>
 File: images/p1-3-a_1_20.png Graphic file (type png)
 
 <use images/p1-3-a_1_20.png>
@@ -992,7 +992,7 @@ Overfull \hbox (15.81293pt too wide) in paragraph at lines 15--17
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[9]) <images/p1-6_num_pixels.png, id=382, 978.65625pt x 598.235pt>
+[9]) <images/p1-6_num_pixels.png, id=386, 978.65625pt x 598.235pt>
 File: images/p1-6_num_pixels.png Graphic file (type png)
 
 <use images/p1-6_num_pixels.png>
@@ -1003,7 +1003,7 @@ Overfull \hbox (28.45273pt too wide) in paragraph at lines 291--292
  [][] 
  []
 
-<images/p1-6_closest_pixels.png, id=383, 975.645pt x 574.145pt>
+<images/p1-6_closest_pixels.png, id=387, 975.645pt x 574.145pt>
 File: images/p1-6_closest_pixels.png Graphic file (type png)
 
 <use images/p1-6_closest_pixels.png>
@@ -1018,7 +1018,7 @@ Overfull \hbox (28.45273pt too wide) in paragraph at lines 297--298
 [10 <./images/p1-6_num_pixels.png (PNG copy)>] (./code/tsk1_6_1.m) [11 <./image
 s/p1-6_closest_pixels.png (PNG copy)>] (./code/tsk1_6_2.m)
 (./code/get_closest_pixels.m) (./code/tsk1_6_3.m) (./code/tsk1_6_4.m) [12]
-(./code/tsk2_1_a.m) (./code/report_lr.m
+[13] (./code/tsk2_1_a.m) (./code/report_lr.m
 Overfull \hbox (11.01288pt too wide) in paragraph at lines 8--9
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
@@ -1030,27 +1030,27 @@ Overfull \hbox (35.01312pt too wide) in paragraph at lines 24--25
 
  []
 
-) [13] (./code/tsk2_1_c_investigation.m [14]) [15] (./code/nlm_loglike.m)
-(./code/tsk2_2_a.m) [16] (./code/tsk2_2_b.m)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 526.
- [17]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 526.
+) [14] (./code/tsk2_1_c_investigation.m [15]) [16] (./code/nlm_loglike.m)
+(./code/tsk2_2_a.m) [17] (./code/tsk2_2_b.m) [18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 551.
+ [19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 551.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 526.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 526.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 551.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 551.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 82ED1932124D5AEAF4AE79DE1A8AFDA7;734.
+(rerunfilecheck)             Checksum: E35A0359594C131025C9F988C379E2C1;812.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 526.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 551.
  ) 
 Here is how much of TeX's memory you used:
- 11721 strings out of 493089
- 169083 string characters out of 6134841
+ 11727 strings out of 493089
+ 169141 string characters out of 6134841
  297286 words of memory out of 5000000
- 14430 multiletter control sequences out of 15000+600000
+ 14431 multiletter control sequences out of 15000+600000
  22986 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,14n,43p,1410b,1984s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1075,10 +1075,10 @@ st/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2015/texmf-dist
 onts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb>
-Output written on report.pdf (17 pages, 730405 bytes).
+Output written on report.pdf (19 pages, 735091 bytes).
 PDF statistics:
- 863 PDF objects out of 1000 (max. 8388607)
- 802 compressed objects within 9 object streams
- 540 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 880 PDF objects out of 1000 (max. 8388607)
+ 817 compressed objects within 9 object streams
+ 545 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
