@@ -25,7 +25,7 @@ function [] = tsk2_2_b(x_train, y_train, x_test, y_test)
     qq = train(x_train, y_train);
     weights = qq(1:end-1)
     final_a = qq(end)
-    epsilon = sigma(final_a) % report it for the task
+    epsilon = sigma(final_a) % report it for 
     report_lr(weights, x_train, y_train, 'training set');
     report_lr(weights, x_test,  y_test,  'test set');
 end

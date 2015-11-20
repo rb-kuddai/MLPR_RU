@@ -51,27 +51,27 @@
 			 	\item
 				 	\begin{figure}[t]
 				 		\centering
-				 		\caption{patch images}
+				 		\caption{standard deviations in the xtr dataset}
 				 		\label{fig:patch_images}
 				 		\begin{subfigure}{0.5\textwidth}
 				 			\includegraphics[width=\linewidth]{images/p1-1-a_std_hist}
-				 			\caption{histogram of standard deviations in the xtr dataset after normalisation}
+				 			\caption{histogram of the xtr dataset}
 				 			\label{fig:p1-1-a_std_hist}
 				 		\end{subfigure}%
 				 		\begin{subfigure}{0.5\textwidth}
 				 			\includegraphics[width=\linewidth]{images/p1-1-a_dist}
-				 			\caption{approximate distribution of standard deviations in the xtr dataset}
+				 			\caption{approximate distribution}
 				 			\label{fig:p1-1-a_dist}
 				 		\end{subfigure}%
 				 	\end{figure}
 				 	From the figure \ref{fig:p1-1-a_std_hist} we can see that after the peak on the second bin (associate it with deviation around 1 discrete pixel value) the number of patches declines exponentially as  standard deviation increases . We can conclude that most of patches have standard deviation between 0 and 0.05. It can be confirmed from subtask c. 52739 patches which is more than 75\% of our initial dataset have standard deviation within 0 and 0.0635 range, and 0.0635 is quite small standard deviation. Therefore, most of the patches are flat ones. \\
-				 	The distribution is not symmetric and can be approximated by family of distribution $P(t) \propto t^{\alpha} exp(-\beta t)$. For example, if I put $\alpha = 0.78$ and $\beta = 50$ then I will have the figure \ref{fig:p1-1-a_dist}\\
-				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = \approx 0.0156$ so that values between 0 and 0.0156 will be regarded as discrete intensity of zero and between 63 * 0.0156 and 1 will be discrete intensity of 63. Because most of the patches are flat one we can approximately describe each such patch as Gaussian. That is why we can say that approximately 95\% of pixels will be within two standard deviations from mean of the patch. Due to the fact that each bin corresponds to the standard deviation by the equation $bin-standard-deviation = bin-index * bin-width$ and, therefore, two standard deviations $2 * bin-standard-deviation = bin-index * 2 * bin-width$. So by choosing bin-width as half of our threshold 0.0156 we can associate each bin with discrete (original pixel value) value of 2 standard deviations. That is why it will be possible to say that for the patch in the first bin most of the pixels are different from the mean value only by 1 discrete value of intensity, for second bin it will be 2 discrete value of intensity, etc until we reach non-flat patches. $bin-width = \frac{threshold} {2} = \frac{0.0156}{2} =0.5/64 = 0.0078$ and to have such width of the bins we should choose 64 as number of our bins.
+				 	The distribution is not symmetric and can be approximated by family of distributions $P(t) \propto t^{\alpha} exp(-\beta t)$. For example, if I put $\alpha = 0.78$ and $\beta = 50$ then I will have the figure \ref{fig:p1-1-a_dist}\\
+				 	The maximum possible value of standard deviation is $\frac{max. - min.}{2}$, so in our case after normalisation it is $\frac{1 - 0}{2}= 0.5$. Our threshold to distinguish discrete values of pixels is $\frac{1}{64} = \approx 0.0156$ so that values between 0 and 0.0156 will be regarded as discrete intensity of zero and between 63 * 0.0156 and 1 will be discrete intensity of 63. Because most of the patches are flat one we can approximately describe each such patch as Gaussian. That is why we can say that approximately 95\% of pixels will be within two standard deviations from mean of the patch. Due to the fact that each bin corresponds to the standard deviation by the equation $bin-standard-deviation = bin-index * bin-width$ and, therefore, two standard deviations $2 * bin-standard-deviation = bin-index * 2 * bin-width$. So by choosing bin-width as half of our threshold 0.0156 we can associate each bin with discrete (original pixel value) value of 2 standard deviations. That is why it will be possible to say that for the patch in the first bin most of the pixels are different from the mean value only by 1 discrete value of intensity, for second bin it will be 2 discrete value of intensity, etc until we reach non-flat patches. $bin-width = \frac{threshold} {2} = \frac{0.0156}{2} =0.5/64 = 0.0078 = \frac{max. - min.}{64}$   so we should choose 64 as number of our bins.
 				 	Code snippet to plot histogram:
 				 	\lstinputlisting{code/tsk1_1_a.m}
 				 	
 				\item
-					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the target pixel pixel in the flat patch should be something like this $f(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x}_{all\ other\ pixels})$ where $o(\vect{x}_{all\ other\ pixels})$ is small function in comparison to $const_{flat\ patch}$, and $o(\vect{x_{all\ other\ pixels}})$  mean and standard deviation over all pixels in the patch are 0 and $\sigma_{flat\ patch}$ respectively. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
+					I would choose the mean of all pixels in the patch as simple predictor for flat patches. Given the definition of flat patches the intensity of the target pixel pixel (as any other pixel in the patch respectively) in the flat patch should be something like this $f(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + o(\vect{x}_{all\ other\ pixels})$ where $o(\vect{x}_{all\ other\ pixels})$ is small function in comparison to $const_{flat\ patch}$ and it is not completely deterministic so we can approximately replace it with Gaussian $f(\vect{x_{all\ other\ pixels}}) = const_{this flat\ patch} + \mathcal{N}(0, \sigma_{flat \, patch} )$. For flat patches the following is true $\sigma_{flat \, patch} \leq \sigma_{flat \, pach \, max}$. So it is natural to propose  $const_{this flat\ patch}$ as our prediction, which can be received by calculating mean over all pixels in the flat patch\\
 					The performance of this simple predictor can be estimated by considering extreme case when after normalisation (all pixel values between 0 and 1) most pixels are zeroes and small portion of pixels are ones (correspond to original intensity of 63). Let $N-m$ be number of zeros and let $m$ be number of ones and I denote $\mu$ as mean. 
 					\begin{gather*}
 						m < N - m
@@ -141,7 +141,7 @@
 				 			\label{fig:p1-2-a_target_hist}
 				 		\end{subfigure} 		
 				 	\end{figure}	
-					I used 5000 training points from xtr\_nf and ytr\_nf to figure \ref{fig:p1-2-a_closest_pixels}. From it we can see that x(j, end), x(j, end - 34), y(j) are strongly positively correlated. However, there is some  number of deviations from this trend. It seems that these deviations are normally distributed because the bigger distance from general trend the fewer instances we have on the plot. By looking at the figures \ref{fig:p1-2-a_left_target}, \ref{fig:p1-2-a_left_target} and the huge bulb like distribution in the beginning of the figure  \ref{fig:p1-2-a_closest_pixels}  it may seem that $\sigma_{\eta}$ standard deviation of the noise $\eta$ in this expression for linear regression model $y = \vect{w}^{T}\vect{x} + \eta \quad \eta \approx Gaussian(0, \sigma_{\eta})$ in reality is not a constant and it depends heavily on the target pixel value. But it happens due to the fact that it is much more likely to have darker target pixels, and therefore we have more samples from our distribution in the darker area. This can be seen on the histogram \ref{fig:p1-2-a_target_hist}, and I have slightly inclined figures  \ref{fig:p1-2-a_left_target}, \ref{fig:p1-2-a_left_target} so it is easier to see the number of data points.\\
+					I used 5000 training points from xtr\_nf and ytr\_nf to figure \ref{fig:p1-2-a_closest_pixels}. From it we can see that x(j, end), x(j, end - 34), y(j) are strongly positively correlated. However, there is some  number of deviations from this trend. It seems that these deviations are normally distributed because the bigger distance from general trend the fewer instances we have on the plot. By looking at the figures \ref{fig:p1-2-a_left_target}, \ref{fig:p1-2-a_left_target} and the huge bulb like distribution in the beginning of the figure  \ref{fig:p1-2-a_closest_pixels}  it may seem that $\sigma_{\eta}$ standard deviation of the noise $\eta$ in this expression for linear regression model $y = \vect{w}^{T}\vect{x} + \eta \quad \eta \approx Gaussian(0, \sigma_{\eta})$ in reality is not a constant and it depends heavily on the target pixel value. But it happens due to the fact that it is much more likely to have darker target pixels, and therefore we have more samples from our distribution in the darker area so it looks more dense. This can be seen on the histogram \ref{fig:p1-2-a_target_hist}, and I have slightly inclined figures  \ref{fig:p1-2-a_left_target}, \ref{fig:p1-2-a_left_target} so it is easier to see the number of data points.\\
 					Code snippet for scatter plot:
 					\lstinputlisting{code/tsk1_2_a.m} 
 				\item
@@ -399,7 +399,7 @@
 								\hline
 							\end{tabular}
 						\end{center}
-						The minimisation function converged on 122 linear search with value 0. This and results in the table lead to conclusion that our training set is perfectly linearly separable. Interesting that our prediction accuracy on the test set dropped slightly, but we have  finite mean log probability on the test at least. But mean log probability is still very small (in comparison to baseline $P(y | \vect{x})=0.5$, for example) which indicates that predictor is too confident and sometimes it makes big mistakes. 
+						The minimisation function converged on 122 linear search with value 0. This and results in the table lead to conclusion that our training set is perfectly linearly separable. Interesting that our prediction accuracy on the test set dropped slightly, but we have  finite mean log probability on the test at least. But mean log probability is still far below zero (in comparison to baseline $P(y | \vect{x})=0.5$, for example) which indicates that predictor is too confident and sometimes it makes big mistakes. 
 						\\
 						Overall this small investigation helped me to understand what kind of noise we have in the training data. 
 				\end{enumerate}
@@ -517,7 +517,7 @@
 						\begin{align*}
 							\epsilon =  0.2144 \quad a = -1.2989
 						\end{align*}
-						 From here we can see that accuracy has improved on both training and test sets in comparison to the results from task 2.1.b . Although by looking at the mean log probability for training and test set we can conclude that predictor has become less confident in some cases. But by taking into consideration the fact that our training set contains mislabelled data the predictor should be uncertain about such data points.\\ The better accuracy and thus, classification performance points out that by using model which reflects the condition of  our data set better (mislabelled data) we can infer more useful information from the data set and make our predictor more robust to incorrect data points.\\
+						 From here we can see that accuracy has improved on both training and test sets in comparison to the results from task 2.1.b . Although by looking at the mean log probability for training and test set we can conclude that predictor has become too confident in some wrong cases (the value below the result of simple baseline $P(x|y)=0.5$).\\ The better accuracy and thus, classification performance points out that by using model which reflects the condition of  our data set better (mislabelled data) we can infer more useful information from the data set and make our predictor more robust to incorrect data points.\\
 						 The code snippet for this task:
 						 \lstinputlisting{code/tsk2_2_b.m}
 				\end{enumerate}
@@ -545,7 +545,63 @@
 							\end{align*}
 							But the posterior is a probability so its values lies between 0 and 1 so the maximum value of log-posterior is 0. So the situation when $\lambda$ has no bounds and it is not finite must be avoided.
 						\item 
+						
+						The table of initial parameters for slice sampling:
+							\begin{center}
+								\begin{tabular}{| c | c |}
+									\hline
+									Parameter(s) & Value\\
+									\hline
+									burn-in phase & 300 iterations \\
+									\hline
+									number of samples & 700 \\
+									\hline
+									initial weights & all zeros \\
+									\hline
+									$\epsilon$ & 0 \\
+									\hline
+									$log(\lambda)$ & 0 \\
+									\hline
+									weights width &  10 \\
+									\hline
+									$log(\lambda)$ width & 10 \\
+									\hline
+									$\epsilon$ width & 1.0 \\
+									\hline
+								\end{tabular}
+							\end{center}
+							I think the most important parameter here is what part of algorithm's iterations will be devoted to the burn-in phase. If we start to sample too early it will affect our prediction performance as samples at the beginning may not correctly represent our distribution. On the other hand, given that in the assignment we should use exactly 1000 iterations if we set burn-in phase to something big then we probably won't have enough samples to predict confidently. And it is a bit hard to set this parameter via cross-validation because each run for 1000 iterations takes considerable time. So eventually I have chosen 300 iterations for burn-in phase and I take 700 samples. \\
+							I set initial weights to zero as it seems reasonable to start from simple baseline  that predicts $P(y | x) =0.5$ for every observation. Initial epsilon is zero so I start from the point where I think that training data is not noisy which correspond to logistic regression.\\
+							As for widths in David MacKay's text book (Information Theory, Inference, and Learning Algorithms) p377 it is said that algorithm takes linear time to expand interval but logarithmic time to shrink it. So I put for weights width bigger than the values of weights I usually observed during debugging phase in previous tasks. $\epsilon$ changes between 0 and 1 so it is natural to put width 1.0 on it.\\
+						 	\begin{figure}[htbp]
+						 		\centering
+						 		\includegraphics[width=10cm]{images/p2-3-b}
+						 		\caption{plot of $log(\lambda)$ against $\epsilon$. Both drawn from sampling procedure}
+						 		\label{fig:p2-3-b}
+						 	\end{figure}
+						 	As can been seen on figure \ref{fig:p2-3-b} most of the  $\epsilon$'s are not far from our previous value 0.2144 and they lay within 0.17 and 0.25 range. . So the value for $\epsilon$ from previous task seems quite reasonable. Although I note that the centre of distribution is a bit smaller than value $\epsilon$ from previous task.\\
+						 	From the plot we can see that there is some negative correlation between $\epsilon$ and $\lambda$. It probably happens because both $\epsilon$ and $\lambda$ ($log(\lambda)$) are used in the model to avoid noise fitting although in different ways. That is why when one of them is high then the other one can be smaller.\\
+						 	Code to retrieve samples:
+						 	\lstinputlisting{code/tsk2_3_sampler.m}
+						 	Code for plotting:
+						 	\lstinputlisting{code/tsk2_2_b.m}
+						\item
+							Given that we are using Bayesian method and that for this task we must only use different weights drawn from our posterior distribution, I use logistic regression and average its predictions for each input over weights from different samples.\\ 
+							The results presented in the table:
+							\begin{center}
+								\begin{tabular}{| c | c |}
+									\hline
+									\, & Value\\
+									\hline
+									Accuracy & $91.51 \pm 0.69\%$\\
+									\hline
+									Log mean & $-0.189 \pm 0.013$\\ 
+									\hline
+								\end{tabular}
+							\end{center}
+							Taking into account error bars, our performance almost the same as in previous task. However our log mean has improved significantly and it is much better than those of simple baseline which assign $P(y | \vect{x}) = 0.5$. It indicates then even when we are doing wrong prediction we are not very confident in our prediction. So it is the best predictor among those we created in the part 2.\\
+							Code for this task
+							\lstinputlisting{code/tsk2_3_c.m}
 					\end{enumerate}
-							
-				
+
 \end{document}

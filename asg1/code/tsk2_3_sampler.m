@@ -21,8 +21,8 @@ function [samples] = tsk2_3_sampler(x_train, y_train)
     end
     
     D = size(x_train, 2);
-    S = 750; %number of samples
-    burn = 250; %number of iterations to burn out
+    S = 700; %number of samples
+    burn = 300; %number of iterations to burn out
     %initial point
     %so initial result correspond to the posteriror of 0.5
     ww0 = zeros(D, 1); %weights
@@ -30,12 +30,12 @@ function [samples] = tsk2_3_sampler(x_train, y_train)
     eps0 = 0; %epsilon
     
     zz = [ww0; eps0; log_lmb0;];
-    %in David MacKay's text book p375 it is said that shrinkage has log complexity
+    %in David MacKay's text book p377 it is said that shrinkage has log complexity
     %in contrast to expansion which takes linear time
     %I take big width for all variables, except for eps because 1 is more
     %then enough for it
     width = ones(D + 2, 1) * 10;
-    width(D + 1) = 1.1;%eps
+    width(D + 1) = 1.0;%eps
     samples = slice_sample(S, burn, @target_fun, zz, width, true, x_train, y_train);
 end
 
