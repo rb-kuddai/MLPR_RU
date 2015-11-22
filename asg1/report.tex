@@ -191,7 +191,12 @@
 				 	\\
 					Code snippet to get linear regression predictor (will also be used afterwards):
 					\lstinputlisting{code/cs_linear_regression.m} 
-					Code snippet to compute root mean square error (RMSE) with upper/lower bounds (implementation pointed out by professor Chris Williams), which correspond to upper/lower bounds of mean square error(MSE) through standard error of MSE (further explanation in code comments)  (will also be used  afterwards):
+					Code snippet to compute root mean square error (RMSE) with upper/lower bounds (implementation pointed out by professor Chris Williams), which correspond to upper/lower bounds of mean square error(MSE) through standard error of MSE:
+					\begin{align*}
+					RMSE\ with\ bounds &= sqrt(MSE \pm standard\ error\ of\ SE) \approx sqrt(MSE) \pm \frac{standard\ error\ of\ SE}{2 *  sqrt(MSE)} \\
+					&= RMSE \pm \frac{standard\ error\ of\ SE}{2 *  sqrt(MSE)}
+					\end{align*}
+					 (further explanation in code comments)  (will also be used  afterwards):
 					\lstinputlisting{code/cs_rmse.m}
 					Code snippet to show rmse on training and test set with bounds (will also be used  afterwards):
 					\lstinputlisting{code/show_rmse.m}
@@ -378,7 +383,7 @@
 								\hline
 								\, & First 100 points from training set & Test set \\ 
 								\hline
-								Accuracy                  & $99.0 \pm 1.0 \%$ & $ 75.2 \pm 1.1 \%$ \\ 
+								Accuracy                  & $99.0 \pm 1.0 \%$ & $ 73.4 \pm 1.1 \%$ \\ 
 								\hline
 								Mean log probability &$-0.0139 \pm 0.0098$ & $-\infty$ \\
 								\hline
@@ -397,9 +402,9 @@
 								\hline
 								\, & points from 2 to 100 on training set & Test set \\ 
 								\hline
-								Accuracy                  & $100 \pm 0.0 \% $ & $ 74.8 \pm 1.1  \%$ \\ 
+								Accuracy                  & $100 \pm 0.0 \% $ & $ 76.3 \pm 1.1  \%$ \\ 
 								\hline
-								Mean log probability &$ 0 \pm 0.000$ &  $ -16.0 \pm 1.0 $ \\
+								Mean log probability &$ 0 \pm 0.000$ &  $ -14.70 \pm 0.95  $ \\
 								\hline
 							\end{tabular}
 						\end{center}

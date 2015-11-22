@@ -1,6 +1,7 @@
 %launch via:
-% b) tsk2_1_bc(x_train, y_train, x_test, y_test)
-% c) tsk2_1_bc(x_train, y_train, x_test, y_test, 1:100)
+% b)   tsk2_1_bc(x_train, y_train, x_test, y_test)
+% c)   tsk2_1_bc(x_train, y_train, x_test, y_test, 1:100)
+% c.2) tsk2_1_bc(x_train, y_train, x_test, y_test, 2:100)
 function [] = tsk2_1_bc(x_train, y_train, x_test, y_test, varargin)
     MAX_LIN_SEARCHES = 8000;
     if length(varargin) == 0
