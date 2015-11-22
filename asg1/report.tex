@@ -389,7 +389,7 @@
 								\hline
 							\end{tabular}
 						\end{center}
-						From the table it can be see that linear regression fitted the training data too well and it possibly fitted the noise as well.  That is why it has extremely good accuracy and mean log probability close to zero on the training set (it is very confident in its predictions). On other hand, the results on the test set is much worse in comparison to the previous task.  The mean log probability is $-\infty$ which indicates that in some cases our predictor gives zero chances to the right labels from the test set. The accuracy on the test is still better than those of simple baseline $P(y | \vect{x})=0.5$ which means that even from so limited and noisy data for learning, linear regression is able to infer some useful pattern.
+						From the table it can be see that linear regression fitted the training data too well and it possibly fitted the noise as well.  That is why it has extremely good accuracy and mean log probability close to zero on the training set (it is very confident in its predictions). On other hand, the results on the test set is much worse in comparison to the previous task.  The mean log probability is $-\infty$ which indicates that in some cases our predictor gives zero chances to the right labels from the test set. I checked the weights and they are very huge (something like 1000) so our sigmoid function turns into step function. The accuracy on the test is still better than those of simple baseline $P(y | \vect{x})=0.5$ which means that even from so limited and noisy data for learning, linear regression is able to infer some useful pattern.
 						\\
 						I had a question how is that possible that accuracy is not 100\% on the limited training set. Dimensionality of our feature vector is 100 (101 with bias), so any binary classification task when we have no more than 100 instances should be perfectly linearly separable. The minimisation function converged on 186 iteration with value 1.386294, but in case of perfectly linearly separable data it must be zero (see  Kevin P. Murphy. Machine Learning  A Probabilistic Perspective. paragraph 8.4.3 - Gaussian approximation for logistic regression). So I decided investigate it further. 
 						\\
@@ -431,7 +431,7 @@
 						
 						The derivatives of new model likelihood are:
 						\begin{align}
-							v^{(n)} &= y^{(n)}\vect{x}^{(n)T}\vect{w}
+							v^{(n)} &= y^{(n)}\vect{x}^{(n)T}\vect{w} \quad (swapped\ values\ because\ transpose\ of\ scalar\ is\ a\ scalar)
 							\\
 							L(\vect{w}, \epsilon) &= \sum_{n=1}^{N}log(P(y^{(n)}|\vect{x^{(n)}}, \vect{w}, \epsilon)) = 
 							\sum_{n=1}^{N}log((1-\epsilon)\sigma(v^{(n)}) + \frac{\epsilon}{2}) 
@@ -544,7 +544,7 @@
 							\end{align*}
 							So it produces the same probability as original logistic regression when all of the weights are zero or baseline that predicts $P(y | x) =0.5$ for every case. Putting it in the log-likelihood:
 							\begin{align*}
-							\mathcal{L}(\vect{w}=0, \epsilon)=\sum_{n=1}^{N}P(y| \vect{x}, \vect{w}=0, \epsilon)=\sum_{n=1}^{N}log(0.5)=log(0.5)N = -0.6931N
+							\mathcal{L}(\vect{w}=0, \epsilon)=\sum_{n=1}^{N}log(P(y| \vect{x}, \vect{w}=0, \epsilon))=\sum_{n=1}^{N}log(0.5)=log(0.5)N = -0.6931N
 							\end{align*}
 							Which is constant given the data (so N is fixed).
 							Using this result, the log-posterior from the equation 6 in the assignment when all weights are zeros becomes:
@@ -552,7 +552,7 @@
 							logP(\epsilon, \vect{w} &=0, log( \lambda)=\infty | data) = -0.6931N - \lambda * 0 + \frac{D}{2}log(\lambda) + const =  \frac{D}{2}log(\lambda) + const2 \\
 							&= \infty + const2 = \infty \\
 							\end{align*}
-							But the posterior is a probability, therefore, its values lies between 0 and 1 and the maximum value of log-posterior must 0. So the situation when $\lambda$ has no bounds and it is not finite value must be avoided.
+							But the posterior is a probability, therefore, its values lies between 0 and 1 and the maximum value of log-posterior must 0. So the situation when $\lambda$ has no bounds (the ‘improper’ limit) and it can potentially become infinite must be avoided.
 						\item 
 						
 						The table of initial parameters for slice sampling:
