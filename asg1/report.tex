@@ -343,6 +343,7 @@
 						\textbf{Bias feature} \\
 						The code snippet to add bias term:
 						\lstinputlisting{code/tsk2_1_a.m}
+						The bias term is assumed to be added before launching any of the remaining tasks.
 					\item
 						\textbf{ Maximizing the likelihood} \\
 						The code snippet to report logistic regression performance with error bars:
@@ -364,7 +365,7 @@
 						\end{center}
 						Not a typo, my accuracy was better on the test set. Probably this indicates that training set is noisy (has some mislabelled records) but logistic regression is robust enough to capture general pattern instead of fitting the noise. And if we suggest that the test set was created more carefully then it will explain better accuracy on the test set.
 						\\
-						The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4921 linear search.  The log probability of the baseline line for each input is $log(P(y | \vect{x})) = log(0.5) = -0.6931$. The closer $mean(log(P(y|\vect{x})))$ to zero the more confident predictor in the right answers. Although we must remember the fact that we can have good predictor with good accuracy, but if it gives chances which is close to zero to the right answer even to the one data point then due to the nature of log function ($log(0)= -\infty$) our log mean quantity will be skewed heavily and much smaller than zero. So theoretically it is possible to have predictor with 99.99\% accuracy but with mean log probability far below zero.
+						The minimisation function converged by itself (I put very big value for maximum number of linear searches - 8000) on 4921 linear search.  The log probability of the baseline line for each input is $log(P(y | \vect{x})) = log(0.5) = -0.6931$. The closer $mean(log(P(y|\vect{x})))$ to zero the more confident predictor in the right answers. Although we must remember the fact that we can have good predictor with good accuracy, but if it gives chance which is close to zero to the right answer even to the one data point then due to the nature of log function ($log(0)= -\infty$) our log mean quantity will be skewed heavily and much smaller than zero. So theoretically it is possible to have predictor with 99.99\% accuracy but with mean log probability far below zero.
 						\\
 						As we can see our mean log probability in  test set is closer to 0 than those of simple baseline $P(y | \vect{x})=0.5$ which together with our accuracy  implies that our performance is better.
 						
@@ -402,7 +403,7 @@
 								\hline
 							\end{tabular}
 						\end{center}
-						The minimisation function converged on 122 linear search with value 0. This and results in the table lead to conclusion that our training set is perfectly linearly separable. Interesting that our prediction accuracy on the test set dropped slightly, but we have  finite mean log probability on the test at least. But mean log probability is still far below zero (in comparison to baseline $P(y | \vect{x})=0.5$, for example) which indicates that predictor is too confident and sometimes it makes big mistakes. 
+						The minimisation function converged on 122 linear search with value 0. This and results in the table lead to conclusion that our training set is perfectly linearly separable. Interesting that our prediction accuracy on the test set dropped slightly, but we have  finite mean log probability on the test at least. But mean log probability is still far below zero (in comparison to baseline $P(y | \vect{x})=0.5$, for example) which indicates that predictor is too confident in some wrong answers and, therefore, sometimes it makes big mistakes. 
 						\\
 						Overall this small investigation helped me to understand what kind of noise we have in the training data. 
 				\end{enumerate}
