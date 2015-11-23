@@ -11,7 +11,7 @@ function [] = tsk2_3_c(samples, x_test, y_test)
         %xx * wws  N x S
         S = size(wws, 2);
         sigmas = 1./(1 + exp(-repmat(yy, [1, S]) .* (xx*wws)));%N x S
-        probs = mean(sigmas, 2);%assemble samples
+        probs = mean(sigmas, 2); % assemble samples
         log_probs = log(probs); 
         accuracy = probs > 0.5;
         
